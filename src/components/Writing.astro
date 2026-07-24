@@ -40,10 +40,15 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         <h4>{writing.essays.title}</h4>
         {
           writing.essays.items.map((item) => (
-            <div class="essay">
-              <div class="e-title">{item.title}</div>
-              <div class="e-note">{item.note}</div>
-            </div>
+            <a class="essay" href={item.href} target="_blank" rel="noopener">
+              {'image' in item && item.image && (
+                <img src={`${base}/${item.image}`} alt={`${item.title} — cover`} loading="lazy" />
+              )}
+              <div>
+                <div class="e-title">{item.title} ↗</div>
+                <div class="e-note">{item.note}</div>
+              </div>
+            </a>
           ))
         }
       </div>
@@ -136,10 +141,24 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   .e-kicker { font-size: 11px; font-weight: 700; color: var(--color-neutral-600); }
   .essays h4 { font-size: 19px; margin: 9px 0 14px; }
   .essay {
+    display: flex;
+    align-items: center;
+    gap: 14px;
     border-left: 2px solid var(--color-accent-300);
     padding-left: 14px;
+    text-decoration: none;
+    color: inherit;
   }
-  .essay + .essay { margin-top: 12px; }
+  .essay:hover .e-title { color: var(--color-accent-700); }
+  .essay + .essay { margin-top: 14px; }
+  .essay img {
+    width: 110px;
+    aspect-ratio: 2 / 1;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: var(--shadow-sm);
+    flex: none;
+  }
   .e-title { font-weight: 700; font-size: 14.5px; }
   .e-note { font-size: 12.5px; color: var(--color-neutral-600); }
 

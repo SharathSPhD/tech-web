@@ -6,7 +6,12 @@ html { scroll-behavior: smooth; scroll-padding-top: 78px; }
 
 body {
   margin: 0;
-  background: var(--color-bg);
+  background:
+    radial-gradient(1100px 520px at 92% -6%, color-mix(in srgb, var(--color-accent-200) 65%, transparent), transparent 70%),
+    radial-gradient(900px 480px at -6% 30%, color-mix(in srgb, var(--color-accent-2-200) 55%, transparent), transparent 70%),
+    radial-gradient(1200px 600px at 105% 78%, color-mix(in srgb, var(--color-accent-300) 32%, transparent), transparent 72%),
+    var(--color-bg);
+  background-attachment: fixed;
   color: var(--color-text);
   font-family: var(--font-body);
   font-size: 15px;

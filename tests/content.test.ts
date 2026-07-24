@@ -66,6 +66,34 @@ describe('research projects', () => {
     // no bare abbreviations
     expect(text).not.toMatch(/\bISRO\b|\bGE\b|\bIISc\b|\bEPSRC\b/);
   });
+  it('postdoc is at City, University of London', () => {
+    const postdoc = deeptechExperience.find((e) => e.title.includes('Postdoc'))!;
+    expect(postdoc.body).toContain('City, University of London');
+    expect(postdoc.body).not.toContain('York');
+  });
+  it('banned phrasings are gone', () => {
+    const text = [
+      JSON.stringify(allProjects),
+      JSON.stringify(practice),
+      JSON.stringify(services),
+      JSON.stringify(about),
+    ].join(' ');
+    expect(text).not.toMatch(/gated to evidence|honest/i);
+    expect(text).not.toMatch(/information-entropy pricing/i);
+  });
+  it('deep-tech includes the four technektar.dev highlights with figures', () => {
+    for (const slug of ['aero-turbine', 'predictive-maintenance', 'gyroscope', 'remote-monitoring']) {
+      const p = allProjects.find((x) => x.slug === slug)!;
+      expect(p, slug).toBeDefined();
+      expect(p.figure, slug).toMatch(/^figures\//);
+      expect(JSON.stringify(p.links)).toContain('technektar.dev');
+    }
+  });
+  it('prabhasa-babylm shows the leaderboard rank', () => {
+    const p = allProjects.find((x) => x.slug === 'prabhasa-babylm')!;
+    expect(p.blurb).toContain('#2');
+    expect(p.figure).toContain('babylm-leaderboard');
+  });
   it('founder name never appears in site copy', () => {
     const text = [
       JSON.stringify(allProjects.map((p) => ({ t: p.title, b: p.blurb }))),

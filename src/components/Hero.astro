@@ -100,8 +100,7 @@ const { hero } = site;
   }
 
   .terminal {
-    background: linear-gradient(170deg, var(--color-neutral-100), var(--color-surface));
-    border-left: 1px solid var(--color-divider);
+    background: linear-gradient(160deg, #221a12, var(--term-bg) 55%);
     padding: 26px 24px 24px;
     display: flex;
     flex-direction: column;
@@ -109,18 +108,18 @@ const { hero } = site;
   }
   .term-bar { display: flex; align-items: center; gap: 7px; margin-bottom: 15px; }
   .dot { width: 11px; height: 11px; border-radius: 50%; }
-  .term-title { margin-left: 8px; font-size: 11px; color: var(--color-neutral-600); }
-  .term-body { font-size: 12.5px; line-height: 1.9; color: var(--color-neutral-800); }
-  .ghost { color: var(--color-neutral-500); }
-  .faint { color: var(--color-neutral-600); }
-  .green { color: var(--color-accent-2-700); }
-  .orange { color: var(--color-accent-600); }
-  .white { color: var(--color-text); font-weight: 700; }
-  .lit { color: var(--color-text); }
+  .term-title { margin-left: 8px; font-size: 11px; color: var(--term-faint); }
+  .term-body { font-size: 12.5px; line-height: 1.9; color: var(--term-text); }
+  .ghost { color: var(--term-ghost); }
+  .faint { color: var(--term-faint); }
+  .green { color: var(--term-green); }
+  .orange { color: var(--term-orange); }
+  .white { color: #fff; font-weight: 700; }
+  .lit { color: var(--term-text); }
   .row { display: flex; }
   .row.first { margin-top: 8px; }
   .phase {
-    color: var(--color-accent-600);
+    color: var(--term-orange);
     display: inline-block;
     width: 118px;
     flex: none;
@@ -129,15 +128,15 @@ const { hero } = site;
   .verdict {
     margin-top: 7px;
     padding-top: 9px;
-    border-top: 1px solid var(--color-divider);
+    border-top: 1px solid var(--term-hairline);
   }
   .stats { margin-top: 13px; }
   .term-foot {
     margin-top: auto;
     padding-top: 16px;
     font-size: 10.5px;
-    color: var(--color-neutral-600);
-    border-top: 1px solid var(--color-divider);
+    color: var(--term-faint);
+    border-top: 1px solid var(--term-hairline);
     margin-top: 18px;
   }
 </style>

@@ -1,7 +1,7 @@
 export const writing = {
   kicker: 'Writing & media',
   heading: 'Dense research, made to travel.',
-  sub: 'The same ideas, retold for different readers — a podcast, two newsletters, an engineering blog, and a formally-verified book.',
+  sub: 'The same ideas, retold for different readers — a podcast, two newsletters, a case-study portfolio, and a machine-verified book.',
   outlets: [
     {
       kicker: 'Substack',
@@ -16,10 +16,10 @@ export const writing = {
       href: 'https://medium.com/@sharath.ai.colab',
     },
     {
-      kicker: 'GitHub Pages · Jekyll',
-      title: 'Engineering blog',
-      body: 'Clean, accessible notes tagged #ai-ml, #engineering, #data-science. →',
-      href: 'https://sharathsphd.github.io',
+      kicker: 'Portfolio · technektar.dev',
+      title: 'Case-study portfolio',
+      body: 'Two decades of engineering wins — wind-tunnel campaigns, predictive-maintenance awards, avionics breakthroughs. →',
+      href: 'https://www.technektar.dev',
     },
   ],
   podcast: {
@@ -42,12 +42,21 @@ export const writing = {
     title: 'Where philosophy meets architecture',
     items: [
       {
-        title: 'AI and the Taittirīya Upaniṣad',
-        note: 'the five sheaths as a model of layered cognition',
+        title: 'Architectures of Artificial Mind',
+        note: 'reading modern AI stacks through classical frameworks',
+        href: 'https://technektar.substack.com/p/architectures-of-artificial-mind-0bf',
+        image: 'figures/essay-architectures.jpg',
       },
       {
-        title: 'Architectures of the Artificial Mind',
-        note: 'reading modern AI stacks through classical frameworks',
+        title: 'Ancient Epistemology for Modern AI',
+        note: 'a Navya-Nyāya foundation for language models',
+        href: 'https://technektar.substack.com/p/ancient-epistemology-for-modern-ai-b9c',
+        image: 'figures/essay-epistemology.jpg',
+      },
+      {
+        title: 'AI and the Taittirīya Upaniṣad',
+        note: 'the five sheaths as a model of layered cognition',
+        href: 'https://medium.com/@sharath.ai.colab/ai-and-the-taittiriya-upanishad-518498e70de0',
       },
     ],
   },

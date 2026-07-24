@@ -21,6 +21,10 @@ import { services } from '../data/pillars';
         ))
       }
     </div>
+    <div class="cta-row">
+      <p>Every project above started as someone's "impossible" brief.</p>
+      <a href="#contact" class="cta">Bring us yours →</a>
+    </div>
   </div>
 </section>
 
@@ -61,4 +65,27 @@ import { services } from '../data/pillars';
     line-height: 1.7;
     color: var(--color-neutral-800);
   }
+  .cta-row {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .cta-row p {
+    font-size: 16px;
+    font-style: italic;
+    color: var(--color-neutral-700);
+    margin: 0;
+  }
+  .cta {
+    background: var(--color-accent);
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 14.5px;
+    text-decoration: none;
+  }
+  .cta:hover { background: var(--color-accent-600); }
 </style>

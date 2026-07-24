@@ -39,32 +39,32 @@ export const services = {
   sub: 'Engagements from a two-day teardown to a multi-month build. We prototype fast, ship evidence-gated, and leave you the code and the reasoning.',
   columns: [
     {
-      title: 'AI R&D & Safety',
+      title: 'AI — Foundation Models, Research Engineering & Safety',
       colorVar: 'var(--color-accent-700)',
       items: [
-        'Mechanistic interpretability audits',
-        'Jailbreak hardening & red-teaming',
+        'Foundation-model research & from-scratch pretraining',
         'Domain fine-tuning & reasoning engines',
-        'Agent orchestration & Claude Code tooling',
+        'Mechanistic interpretability audits, jailbreak hardening & red-teaming',
+        'Agent plugins, skills & MCP tooling for Claude Code',
       ],
     },
     {
       title: 'Deep-Tech Engineering',
       colorVar: 'var(--color-accent-2-700)',
       items: [
+        'Aerodynamics, turbomachinery & energy-cycle analysis',
         'RL & optimal control for industrial systems',
         'Digital twins & surrogate modeling',
-        'Turbomachinery & energy-cycle analysis',
-        'Prognostics & condition monitoring',
+        'Predictive maintenance & remote condition monitoring',
       ],
     },
     {
       title: 'Fintech & Causal Analytics',
       colorVar: 'var(--color-accent-800)',
       items: [
-        'Pricing world models & elasticity',
         'Causal inference from observational data',
-        'Algorithmic & information-theoretic pricing',
+        'World models & decision intelligence',
+        'Time-series and information-theoretic analytics',
         'Technical explainers & thought leadership',
       ],
     },
@@ -76,7 +76,7 @@ export const about = {
   heading: 'Cross-pollinating innovation, literally.',
   paragraphs: [
     'TechNektar™ is an independent research & engineering practice, led by a data scientist and engineer with a PhD in supercritical-CO₂ power cycles and decades of frontier experience — from inertial-navigation avionics at the Vikram Sarabhai Space Centre, to diagnostics and prognostics at General Electric, to research at world-leading institutions.',
-    'The through-line is transfer: aerospace analytics reshaping retail pricing; 2,500-year-old logic tightening machine reasoning; reinforcement learning running a power plant. We openly publish to contribute to open, multi-disciplinary innovation — and consult to transform your idea into a product.',
+    'The through-line is transfer: aerospace analytics informing demand models; 2,500-year-old logic tightening machine reasoning; reinforcement learning running a power plant. We publish in the open because tested ideas travel further — and we consult because the fastest route from idea to product is a team that has already shipped across all three fields. If your hardest problem sits between disciplines, it has come to the right place.',
   ],
   institutions: [
     'Vikram Sarabhai Space Centre, Indian Space Research Organisation',

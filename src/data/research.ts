@@ -41,7 +41,7 @@ export interface Pillar {
 
 export const researchIntro = {
   kicker: 'Research & systems',
-  heading: '30+ open-source projects, papers and apps — every claim gated to evidence.',
+  heading: '30+ open-source systems, papers and live apps — built to be used, not just cited.',
 };
 
 export const pillars: Pillar[] = [
@@ -76,6 +76,8 @@ export const pillars: Pillar[] = [
             ],
             tone: 'dark',
             accent: 'orange',
+            figure: 'figures/acd.png',
+            figureAlt: 'Active Circuit Discovery — active-inference agent over attribution graphs',
           },
           {
             slug: 'prayoga',
@@ -134,13 +136,15 @@ export const pillars: Pillar[] = [
               { label: 'Paper ↗', href: 'https://zenodo.org/records/18524794' },
             ],
             tone: 'warm',
+            figure: 'figures/pramana.png',
+            figureAlt: 'Pramana training-stage metrics across the Navya-Nyāya reasoning phases',
           },
           {
             slug: 'pwm',
             kicker: 'PWM · live site',
             title: 'Pratyabhijñā World Model',
             blurb:
-              'A Dreamer-class creative world model coupled to a frozen 120B LLM through a learned Vimarśa bridge. The world model imagines; the LLM speaks. 9 of 10 split hypotheses pass — with the negative honestly shipped.',
+              'A Dreamer-class creative world model coupled to a frozen 120B LLM through a learned Vimarśa bridge. The world model imagines; the LLM speaks. 9 of 10 split hypotheses pass.',
             links: [
               { label: 'Live site ↗', href: 'https://sharathsphd.github.io/pratyabhijna-world-model/' },
             ],
@@ -150,16 +154,21 @@ export const pillars: Pillar[] = [
           },
           {
             slug: 'prabhasa-babylm',
-            kicker: 'prabhāsa-babylm · PSALM',
+            kicker: 'prabhāsa-babylm · BabyLM 2026',
             title: 'A foundation model, built from scratch',
             blurb:
-              "Pāṇinian Structured pretraining for small LAnguage Models: a ~200M model pre-pretrained on grammar-generated Sanskrit with gold parses, then real Sanskrit + English (BabyLM), with a 6-phase Navya-Nyāya reasoning scaffold and a Z3 epistemic kernel.",
+              'Pāṇinian Structured pretraining for small LAnguage Models: grammar-generated Sanskrit with gold parses, then real Sanskrit + English. Ranked #2 overall on the BabyLM 2026 strict-track leaderboard.',
+            metrics: [{ value: '#2 overall', note: 'strict track', tone: 'good' }],
             links: [
               { label: 'GitHub ↗', href: 'https://github.com/SharathSPhD/prabhasa-babylm' },
+              {
+                label: 'Leaderboard ↗',
+                href: 'https://huggingface.co/spaces/BabyLM-community/BabyLM-Leaderboard-2026',
+              },
             ],
             tone: 'warm',
-            figure: 'figures/psalm.png',
-            figureAlt: 'Prabhāsa-BabyLM BLiMP results by training arm',
+            figure: 'figures/babylm-leaderboard.png',
+            figureAlt: 'BabyLM 2026 strict-track leaderboard — prabhasa-b at 45.21 overall average',
           },
         ],
       },
@@ -266,11 +275,86 @@ export const pillars: Pillar[] = [
     id: 'pillar-deeptech',
     number: '02',
     name: 'Deep-Tech Engineering',
-    strap: 'supercritical-CO₂ power, turbomachinery, digital twins',
+    strap: 'aerodynamics, predictive maintenance, supercritical-CO₂ power, avionics',
     accentVar: 'var(--color-accent-2-500)',
     themes: [
       {
-        label: '',
+        label: 'Two decades of frontier engineering — four proof points',
+        columnsMin: 235,
+        projects: [
+          {
+            slug: 'aero-turbine',
+            kicker: 'aerodynamics',
+            meta: 'arXiv 2407.11210',
+            title: 'Turbine blades, wind-tunnel proven',
+            blurb:
+              'A cross-border collaboration with Politecnico di Milano put an advanced turbine cascade through a full wind-tunnel campaign — validating blade designs that became a revenue-generating product line.',
+            links: [
+              { label: 'Paper ↗', href: 'https://doi.org/10.48550/arXiv.2407.11210' },
+              {
+                label: 'Case study ↗',
+                href: 'https://www.technektar.dev/case-studies/connected-example.html',
+              },
+            ],
+            tone: 'warm',
+            figure: 'figures/aero-turbine.jpg',
+            figureAlt: 'Wind-tunnel testing of an advanced turbine cascade at Politecnico di Milano',
+          },
+          {
+            slug: 'predictive-maintenance',
+            kicker: 'predictive maintenance',
+            meta: 'national contest · 1st place',
+            title: 'Predicting turbine failure without failure data',
+            blurb:
+              'VIGnAN — a GAN + LSTM system that synthesizes failure signatures to flag aero gas-turbine issues up to 500 operating hours early. First place, Dare to Dream 2.0 national innovation contest.',
+            links: [
+              {
+                label: 'Case study ↗',
+                href: 'https://www.technektar.dev/case-studies/improver-innovator-gan.html',
+              },
+            ],
+            tone: 'warm',
+            figure: 'figures/predictive-maintenance.jpg',
+            figureAlt: 'GAN–LSTM hybrid architecture for gas-turbine failure prediction',
+          },
+          {
+            slug: 'gyroscope',
+            kicker: 'avionics',
+            meta: 'space missions',
+            title: 'The gyroscope insight behind landmark missions',
+            blurb:
+              'A years-long impasse in advanced gyroscope development broke when a previously unrecognized dynamic interaction was identified — new theory that flew on lunar and Mars missions.',
+            links: [
+              {
+                label: 'Case study ↗',
+                href: 'https://www.technektar.dev/case-studies/critical-thinker-isro.html',
+              },
+            ],
+            tone: 'warm',
+            figure: 'figures/gyroscope.jpg',
+            figureAlt: 'Satellite missions enabled by the gyroscope innovation',
+          },
+          {
+            slug: 'remote-monitoring',
+            kicker: 'digital services',
+            meta: 'industrial IoT',
+            title: 'Remote monitoring that pays for itself',
+            blurb:
+              'A steam-turbine remote condition-monitoring platform — real-time health visibility, trend analysis and early warnings that cut unplanned downtime by up to 30% and lifted service renewals 40%.',
+            links: [
+              {
+                label: 'Case study ↗',
+                href: 'https://www.technektar.dev/case-studies/connected-turbine-monitoring.html',
+              },
+            ],
+            tone: 'warm',
+            figure: 'figures/remote-monitoring.jpg',
+            figureAlt: 'Remote turbine condition-monitoring platform dashboard',
+          },
+        ],
+      },
+      {
+        label: 'Reinforcement learning meets thermodynamics',
         columnsMin: 300,
         projects: [
           {
@@ -305,7 +389,7 @@ export const pillars: Pillar[] = [
     id: 'pillar-fintech',
     number: '03',
     name: 'Fintech & Causal Analytics',
-    strap: 'pricing world models, causal inference, information theory',
+    strap: 'causal inference, world models, decision intelligence',
     accentVar: 'var(--color-accent-800)',
     themes: [
       {
@@ -361,15 +445,6 @@ export const pillars: Pillar[] = [
             ],
             tone: 'warm',
           },
-          {
-            slug: 'entropy-pricing',
-            kicker: 'Case study',
-            title: 'Information-entropy pricing',
-            blurb:
-              'An information-theoretic approach to retail price optimization — 5–10% volume uplift with margin growth.',
-            links: [],
-            tone: 'warm',
-          },
         ],
       },
     ],
@@ -398,7 +473,7 @@ export const deeptechExperience = [
   },
   {
     title: 'Postdoctoral research',
-    body: 'sCO₂ turbomachinery for industrial waste-heat recovery at the University of York; multi-institution European consortium leadership.',
+    body: "sCO₂ turbomachinery for industrial waste-heat recovery at City, University of London; multi-institution European consortium leadership.",
   },
   {
     title: 'University research & teaching',

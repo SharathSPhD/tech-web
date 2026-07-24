@@ -43,8 +43,13 @@ const fintech = pillars[2]!;
         <h3 style="color:var(--color-accent-2-700)">{deeptech.number} · {deeptech.name}</h3>
         <span class="strap">{deeptech.strap}</span>
       </div>
-      <div class="grid feature-grid" style="--min:300px">
+      <div class="mono theme-label">{deeptech.themes[0]!.label}</div>
+      <div class="grid" style="--min:235px">
         {deeptech.themes[0]!.projects.map((p) => <ProjectCard project={p} />)}
+      </div>
+      <div class="mono theme-label">{deeptech.themes[1]!.label}</div>
+      <div class="grid feature-grid" style="--min:300px">
+        {deeptech.themes[1]!.projects.map((p) => <ProjectCard project={p} />)}
         <div class="pubs lift">
           <span class="mono pubs-kicker">{deeptechPublications.kicker}</span>
           <h4>{deeptechPublications.title}</h4>
@@ -74,11 +79,8 @@ const fintech = pillars[2]!;
         <h3 style="color:var(--color-accent-800)">{fintech.number} · {fintech.name}</h3>
         <span class="strap">{fintech.strap}</span>
       </div>
-      <div class="grid fintech-grid" style="--min:300px">
-        <ProjectCard project={fintech.themes[0]!.projects[0]!} />
-        <div class="stack">
-          {fintech.themes[0]!.projects.slice(1).map((p) => <ProjectCard project={p} />)}
-        </div>
+      <div class="grid" style="--min:300px">
+        {fintech.themes[0]!.projects.map((p) => <ProjectCard project={p} />)}
       </div>
     </div>
   </div>
@@ -118,10 +120,9 @@ const fintech = pillars[2]!;
     grid-template-columns: repeat(auto-fit, minmax(var(--min, 280px), 1fr));
     gap: 16px;
     margin-top: 14px;
-    align-items: start;
+    align-items: stretch;
   }
   .pillar > .grid:first-of-type { margin-top: 22px; }
-  .stack { display: flex; flex-direction: column; gap: 16px; }
 
   .pubs {
     background: var(--color-neutral-100);
