@@ -1,7 +1,7 @@
 export const site = {
   name: 'TechNektar',
   tagline: 'Cross-Pollinating Innovation',
-  title: 'TechNektar™ — We turn deep research into systems that ship',
+  title: 'TechNektar™ — Where frontier research becomes product',
   description:
     'TechNektar™ is an independent research & engineering consultancy working across AI, deep-tech engineering and fintech — publishing open research and shipping evidence-gated systems.',
   email: 'info@technektar.com',
@@ -14,8 +14,8 @@ export const site = {
   cta: { label: 'Work with us', href: '#contact' },
   hero: {
     badge: 'Research & Engineering',
-    heading: 'We turn deep research into systems that ship',
-    sub: 'TechNektar™ works across three fields that feed each other — <strong>AI</strong>, <strong>deep-tech engineering</strong> and <strong>fintech</strong> — publishing the ideas behind them as papers, code, apps and podcasts.',
+    heading: 'Where frontier research becomes product',
+    sub: 'TechNektar™ works across three fields that feed each other — <strong>AI</strong>, <strong>deep-tech engineering</strong> and <strong>fintech</strong>. Our own research goes out into the world as papers, code, apps and podcasts; client work stays confidential, and yours to keep.',
     primary: { label: 'Explore the work →', href: '#research' },
     secondary: { label: 'Book a conversation', href: '#contact' },
     chips: ['Mechanistic Interpretability', 'RL Control', 'Causal Inference', 'World Models'],

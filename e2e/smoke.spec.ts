@@ -4,7 +4,7 @@ test('page renders all major sections', async ({ page }) => {
   await page.goto('./');
   await expect(page).toHaveTitle(/TechNektar/);
   await expect(page.getByRole('heading', { level: 1 })).toContainText(
-    'We turn deep research into systems that ship'
+    'Where frontier research becomes product'
   );
   for (const id of ['practice', 'research', 'media', 'writing', 'services', 'about', 'contact']) {
     await expect(page.locator(`#${id}`)).toBeAttached();

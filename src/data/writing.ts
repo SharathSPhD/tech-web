@@ -43,20 +43,15 @@ export const writing = {
     items: [
       {
         title: 'Architectures of Artificial Mind',
-        note: 'reading modern AI stacks through classical frameworks',
-        href: 'https://technektar.substack.com/p/architectures-of-artificial-mind-0bf',
+        note: 'Active Inference, DreamerV3 and JEPA on one map',
+        href: 'https://technektar.substack.com/p/architectures-of-artificial-mind',
         image: 'figures/essay-architectures.jpg',
-      },
-      {
-        title: 'Ancient Epistemology for Modern AI',
-        note: 'a Navya-Nyāya foundation for language models',
-        href: 'https://technektar.substack.com/p/ancient-epistemology-for-modern-ai-b9c',
-        image: 'figures/essay-epistemology.jpg',
       },
       {
         title: 'AI and the Taittirīya Upaniṣad',
         note: 'the five sheaths as a model of layered cognition',
         href: 'https://medium.com/@sharath.ai.colab/ai-and-the-taittiriya-upanishad-518498e70de0',
+        image: 'figures/essay-taittiriya.jpg',
       },
     ],
   },
