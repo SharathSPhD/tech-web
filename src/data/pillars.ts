@@ -1,7 +1,7 @@
 export const practice = {
   kicker: 'The practice',
   heading: 'Three fields, cross-pollinating. Ideas from one sharpen the others.',
-  sub: 'Ancient epistemology tightens our AI. Aerospace-grade rigor tunes our control systems. Causal thinking from physics reshapes how we price. We consult across all three — and open-source the research.',
+  sub: 'Ancient epistemology tightens our AI. Aerospace-grade rigor tunes our control systems. Causal thinking from physics reshapes how businesses decide. We consult across all three — and open-source the research.',
   cards: [
     {
       id: 'ai',
@@ -24,8 +24,8 @@ export const practice = {
     {
       id: 'fintech',
       number: '03 — FINTECH',
-      title: 'Prices that learn',
-      body: 'Causal world models for retail pricing, convergent cross-mapping for causal inference, information-theoretic pricing, and the storytelling to explain it.',
+      title: 'Decisions that learn',
+      body: 'Causal inference when correlation lies, world models that plan in imagination, and the storytelling that makes analytics land in the boardroom.',
       link: { label: 'See fintech →', href: '#pillar-fintech' },
       icon: 'fintech',
       accent: 'accentDeep',
