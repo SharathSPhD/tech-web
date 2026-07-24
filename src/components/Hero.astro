@@ -8,7 +8,7 @@ const { hero } = site;
   <div class="wrap grid">
     <div class="editorial">
       <span class="badge">{hero.badge}</span>
-      <h1>{hero.heading}</h1>
+      <h1>We turn deep research into systems that <span class="flourish">ship</span></h1>
       <p class="sub" set:html={hero.sub} />
       <div class="ctas">
         <a href={hero.primary.href} class="btn-primary">{hero.primary.label}</a>
@@ -100,7 +100,8 @@ const { hero } = site;
   }
 
   .terminal {
-    background: var(--term-bg);
+    background: linear-gradient(170deg, var(--color-neutral-100), var(--color-surface));
+    border-left: 1px solid var(--color-divider);
     padding: 26px 24px 24px;
     display: flex;
     flex-direction: column;
@@ -108,34 +109,35 @@ const { hero } = site;
   }
   .term-bar { display: flex; align-items: center; gap: 7px; margin-bottom: 15px; }
   .dot { width: 11px; height: 11px; border-radius: 50%; }
-  .term-title { margin-left: 8px; font-size: 11px; color: var(--term-faint); }
-  .term-body { font-size: 12.5px; line-height: 1.9; color: var(--term-text); }
-  .ghost { color: var(--term-ghost); }
-  .faint { color: var(--term-faint); }
-  .green { color: var(--term-green); }
-  .orange { color: var(--term-orange); }
-  .white { color: #fff; }
-  .lit { color: var(--term-text); }
+  .term-title { margin-left: 8px; font-size: 11px; color: var(--color-neutral-600); }
+  .term-body { font-size: 12.5px; line-height: 1.9; color: var(--color-neutral-800); }
+  .ghost { color: var(--color-neutral-500); }
+  .faint { color: var(--color-neutral-600); }
+  .green { color: var(--color-accent-2-700); }
+  .orange { color: var(--color-accent-600); }
+  .white { color: var(--color-text); font-weight: 700; }
+  .lit { color: var(--color-text); }
   .row { display: flex; }
   .row.first { margin-top: 8px; }
   .phase {
-    color: var(--term-orange);
+    color: var(--color-accent-600);
     display: inline-block;
     width: 118px;
     flex: none;
+    font-weight: 700;
   }
   .verdict {
     margin-top: 7px;
     padding-top: 9px;
-    border-top: 1px solid var(--term-hairline);
+    border-top: 1px solid var(--color-divider);
   }
   .stats { margin-top: 13px; }
   .term-foot {
     margin-top: auto;
     padding-top: 16px;
     font-size: 10.5px;
-    color: var(--term-faint);
-    border-top: 1px solid var(--term-hairline);
+    color: var(--color-neutral-600);
+    border-top: 1px solid var(--color-divider);
     margin-top: 18px;
   }
 </style>

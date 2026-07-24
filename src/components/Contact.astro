@@ -6,8 +6,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 <section id="contact">
   <div class="wrap section-pad grid">
     <div>
-      <div class="mono kicker-dark">Get in touch</div>
-      <h2>Let's find the cross-pollination in your problem.</h2>
+      <div class="kicker">Get in touch</div>
+      <h2>Let's find the <span class="flourish">cross-pollination</span> in your problem.</h2>
       <p class="sub">Consulting, collaborations, speaking, or press. Write directly or use the form.</p>
       <a href={`mailto:${site.email}`} class="mono email">{site.email}</a>
       <div class="addresses">
@@ -37,9 +37,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         <h3>Message sent</h3>
         <p>Thanks — we'll be in touch shortly at the address you gave.</p>
       </div>
-      <form id="contact-form" action={`https://formsubmit.co/${site.email}`} method="POST">
-        <input type="hidden" name="_captcha" value="false" />
-        <input type="hidden" name="_subject" value="TechNektar website enquiry" />
+      <form id="contact-form" method="POST" action="/api/contact" data-mailto={`mailto:${site.email}`}>
+        <input type="text" name="company" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true" />
         <label for="cf-name">Name</label>
         <input id="cf-name" name="name" required type="text" autocomplete="name" />
         <label for="cf-email">Email</label>
@@ -47,6 +46,9 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         <label for="cf-msg">What are you working on?</label>
         <textarea id="cf-msg" name="message" required rows="4"></textarea>
         <button type="submit">Send message</button>
+        <p class="form-err mono" id="form-err" hidden>
+          Couldn't send just now — your mail app will open instead.
+        </p>
       </form>
     </div>
   </div>
@@ -77,88 +79,77 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 <script>
   const form = document.getElementById('contact-form') as HTMLFormElement | null;
   const sent = document.getElementById('form-sent');
+  const err = document.getElementById('form-err');
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
     const data = new FormData(form);
+    const payload = {
+      name: String(data.get('name') ?? ''),
+      email: String(data.get('email') ?? ''),
+      message: String(data.get('message') ?? ''),
+      company: String(data.get('company') ?? ''),
+    };
     try {
-      const action = form.action.replace('formsubmit.co/', 'formsubmit.co/ajax/');
-      const res = await fetch(action, {
+      const res = await fetch(form.action, {
         method: 'POST',
-        body: data,
-        headers: { Accept: 'application/json' },
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
       });
       if (!res.ok) throw new Error(`status ${res.status}`);
+      form.hidden = true;
+      if (sent) sent.hidden = false;
     } catch {
-      // Fall back to a plain (non-AJAX) submit so the message still goes through.
-      form.removeEventListener('submit', () => {});
-      form.submit();
-      return;
+      // API unreachable (e.g. static preview) — open the visitor's mail app instead.
+      if (err) err.hidden = false;
+      const mailto = form.dataset.mailto ?? 'mailto:info@technektar.com';
+      const subject = encodeURIComponent(`Website enquiry from ${payload.name}`);
+      const body = encodeURIComponent(`${payload.message}\n\n— ${payload.name} <${payload.email}>`);
+      window.location.href = `${mailto}?subject=${subject}&body=${body}`;
     }
-    form.hidden = true;
-    if (sent) sent.hidden = false;
   });
 </script>
 
 <style>
-  section { background: var(--term-bg); color: var(--term-text); }
+  section {
+    background:
+      radial-gradient(1000px 460px at 100% 0%, color-mix(in srgb, var(--color-accent-200) 60%, transparent), transparent 70%),
+      var(--color-surface);
+  }
   .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 44px;
   }
-  .kicker-dark {
-    font-size: 12px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--term-orange);
-    font-weight: 700;
-  }
   h2 {
     font-size: clamp(28px, 3.4vw, 40px);
     margin: 12px 0 0;
-    color: #fff;
     letter-spacing: -0.015em;
   }
-  .sub {
-    font-size: 16px;
-    line-height: 1.6;
-    color: var(--term-dim);
-    margin: 16px 0 0;
-    max-width: 440px;
-  }
+  .sub { font-size: 16px; line-height: 1.6; color: var(--color-neutral-700); margin: 16px 0 0; max-width: 440px; }
   .email {
     display: inline-block;
     margin-top: 18px;
     font-size: 15px;
-    color: var(--term-orange);
+    color: var(--color-accent-700);
     font-weight: 700;
   }
-  .addresses {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 22px;
-    margin-top: 34px;
-  }
+  .addresses { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 34px; }
   .addr-label {
     font-size: 11px;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    color: var(--term-faint);
+    color: var(--color-neutral-600);
     font-weight: 700;
   }
-  .addr {
-    font-size: 14px;
-    line-height: 1.55;
-    color: #c9bfae;
-    margin: 8px 0 0;
-  }
+  .addr { font-size: 14px; line-height: 1.55; color: var(--color-neutral-800); margin: 8px 0 0; }
 
   form,
   .sent-panel {
-    background: var(--term-panel);
-    border: 1px solid var(--term-border);
+    background: var(--color-bg);
+    border: 1px solid var(--color-divider);
     border-radius: 20px;
     padding: 26px;
+    box-shadow: var(--shadow-md);
   }
   .sent-panel {
     padding: 40px 30px;
@@ -179,34 +170,26 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     align-items: center;
     justify-content: center;
   }
-  .sent-panel h3 { color: #fff; font-size: 22px; margin: 16px 0 0; }
-  .sent-panel p { color: var(--term-dim); font-size: 14px; margin: 8px 0 0; }
+  .sent-panel h3 { font-size: 22px; margin: 16px 0 0; }
+  .sent-panel p { color: var(--color-neutral-700); font-size: 14px; margin: 8px 0 0; }
 
-  label {
-    display: block;
-    font-size: 12px;
-    font-weight: 700;
-    color: #c9bfae;
-    margin-bottom: 6px;
-  }
-  input:not([type='hidden']),
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+  label { display: block; font-size: 12px; font-weight: 700; color: var(--color-neutral-700); margin-bottom: 6px; }
+  input:not(.hp),
   textarea {
     width: 100%;
     box-sizing: border-box;
-    background: var(--term-bg);
-    border: 1px solid var(--term-border);
+    background: var(--color-neutral-100);
+    border: 1px solid var(--color-divider);
     border-radius: 999px;
     padding: 11px 16px;
-    color: var(--term-text);
+    color: var(--color-text);
     font-family: var(--font-body);
     font-size: 14px;
     margin-bottom: 14px;
   }
-  textarea {
-    border-radius: 16px;
-    resize: vertical;
-    margin-bottom: 16px;
-  }
+  input:not(.hp):focus-visible, textarea:focus-visible { border-color: var(--color-accent); outline-offset: 0; }
+  textarea { border-radius: 16px; resize: vertical; margin-bottom: 16px; }
   button {
     width: 100%;
     background: var(--color-accent);
@@ -218,8 +201,10 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     font-size: 15px;
     cursor: pointer;
   }
+  button:hover { background: var(--color-accent-600); }
+  .form-err { font-size: 11px; color: var(--color-accent-800); margin: 10px 0 0; }
 
-  .footer { border-top: 1px solid var(--term-hairline); }
+  .footer { border-top: 1px solid var(--color-divider); }
   .foot-row {
     padding: 32px clamp(26px, 4vw, 52px);
     display: flex;
@@ -230,40 +215,12 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   }
   .foot-brand { max-width: 460px; }
   .brand-line { display: flex; align-items: center; gap: 10px; }
-  .brand-line img {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    object-fit: cover;
-    object-position: center 34%;
-  }
-  .brand-line span {
-    font-family: var(--font-heading);
-    color: #f5ead8;
-    font-size: 17px;
-  }
-  .brand-line sup {
-    font-size: 8px;
-    color: var(--term-orange);
-    font-family: var(--font-body);
-  }
-  .foot-brand p {
-    font-size: 11.5px;
-    line-height: 1.55;
-    color: var(--term-faint);
-    margin: 12px 0 0;
-  }
-  .foot-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    font-size: 12.5px;
-    font-weight: 700;
-  }
-  .foot-links a { color: #c9bfae; text-decoration: none; }
-  .copyright {
-    padding: 0 clamp(26px, 4vw, 52px) 28px;
-    font-size: 11px;
-    color: var(--term-ghost);
-  }
+  .brand-line img { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; object-position: center 34%; }
+  .brand-line span { font-family: var(--font-heading); font-size: 17px; }
+  .brand-line sup { font-size: 8px; color: var(--color-accent); font-family: var(--font-body); }
+  .foot-brand p { font-size: 11.5px; line-height: 1.55; color: var(--color-neutral-600); margin: 12px 0 0; }
+  .foot-links { display: flex; flex-wrap: wrap; gap: 16px; font-size: 12.5px; font-weight: 700; }
+  .foot-links a { color: var(--color-neutral-700); text-decoration: none; }
+  .foot-links a:hover { color: var(--color-accent-700); }
+  .copyright { padding: 0 clamp(26px, 4vw, 52px) 28px; font-size: 11px; color: var(--color-neutral-500); }
 </style>

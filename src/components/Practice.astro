@@ -14,7 +14,7 @@ const icons: Record<string, string> = {
     <div class="kicker">{practice.kicker}</div>
     <h2>{practice.heading}</h2>
     <p class="sub">{practice.sub}</p>
-    <div class="cards">
+    <div class="cards reveal-stagger">
       {
         practice.cards.map((card) => (
           <a href={card.link.href} class={`card lift accent-${card.accent}`}>

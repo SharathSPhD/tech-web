@@ -1,5 +1,5 @@
 {
   "framework": "astro",
-  "buildCommand": "BASE_PATH=/ SITE_URL=https://technektar.com npm run build",
+  "buildCommand": "BASE_PATH=/ SITE_URL=https://www.technektar.com npm run build",
   "outputDirectory": "dist"
 }

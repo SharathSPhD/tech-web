@@ -1,0 +1,38 @@
+---
+import { stats } from '../data/media';
+---
+
+<div class="band">
+  <div class="wrap row reveal-stagger">
+    {
+      stats.map((s) => (
+        <div class="stat">
+          <div class="mono value">{s.value}</div>
+          <div class="label">{s.label}</div>
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .band {
+    background: linear-gradient(90deg, var(--color-accent-100), var(--color-accent-2-100));
+    border-bottom: 1px solid var(--color-divider);
+  }
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px 44px;
+    padding: 22px clamp(26px, 4vw, 52px);
+    justify-content: space-between;
+  }
+  .stat { display: flex; align-items: baseline; gap: 10px; }
+  .value {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--color-accent-700);
+    letter-spacing: -0.02em;
+  }
+  .label { font-size: 13px; font-weight: 600; color: var(--color-neutral-700); }
+</style>

@@ -3,7 +3,7 @@ import { site } from '../src/data/site';
 import { pillars, deeptechPublications, deeptechExperience } from '../src/data/research';
 import { practice, services, about } from '../src/data/pillars';
 import { writing } from '../src/data/writing';
-import { demos } from '../src/data/demos';
+import { appEmbeds, reads, videos } from '../src/data/media';
 
 const allProjects = pillars.flatMap((p) => p.themes.flatMap((t) => t.projects));
 
@@ -14,7 +14,8 @@ const externalLinks: string[] = [
   ...writing.outlets.map((o) => o.href),
   ...writing.podcast.platforms.map((p) => p.href),
   ...writing.book.stores.map((s) => s.href),
-  ...demos.cards.map((c) => c.cta.href),
+  ...appEmbeds.flatMap((a) => [a.embedUrl, a.openUrl]),
+  ...reads.flatMap((r) => [r.href, ...r.items.map((i) => i.href)]),
 ];
 
 describe('site config', () => {
@@ -104,14 +105,40 @@ describe('book', () => {
   });
 });
 
-describe('demos', () => {
-  it('reference screenshots under screenshots/', () => {
-    for (const card of demos.cards) {
-      expect(card.screenshot).toMatch(/^screenshots\/.+\.(png|jpg|webp)$/);
-      expect(card.alt.length).toBeGreaterThan(10);
+describe('media hub', () => {
+  it('has a full video list with valid ids', () => {
+    expect(videos.length).toBeGreaterThanOrEqual(12);
+    for (const v of videos) {
+      expect(v.id).toMatch(/^[\w-]{11}$/);
+      expect(v.title.length).toBeGreaterThan(5);
     }
   });
-  it('has a YouTube playlist id', () => {
-    expect(demos.youtube.playlistId).toMatch(/^PL[\w-]+$/);
+  it('has embeddable apps including the flagship set', () => {
+    const ids = appEmbeds.map((a) => a.id);
+    for (const expected of ['prabodha', 'dreamprice', 'triz', 'coffee', 'kundali']) {
+      expect(ids).toContain(expected);
+    }
+  });
+  it('reading hub covers Medium, Substack and the blog with real posts', () => {
+    expect(reads).toHaveLength(3);
+    for (const outlet of reads) expect(outlet.items.length).toBeGreaterThanOrEqual(4);
+    const joined = JSON.stringify(reads);
+    expect(joined).toContain('Coffee Shop Mystery');
+  });
+});
+
+describe('v2 content requirements', () => {
+  it('never mentions the gated prabhasa-samskrutam repo', () => {
+    const text = JSON.stringify(allProjects);
+    expect(text).not.toContain('prabhasa-samskrutam');
+    expect(text).toContain('prabhasa-babylm');
+  });
+  it('pratyaksha links to its real repo', () => {
+    const p = allProjects.find((x) => x.slug === 'pratyaksha')!;
+    expect(p.links[0]!.href).toContain('pratyaksha-context-eng-harness');
+  });
+  it('fintech includes coffee causality', () => {
+    const slugs = allProjects.map((p) => p.slug);
+    expect(slugs).toContain('coffee-causality');
   });
 });

@@ -13,6 +13,7 @@ const ogImage = `${Astro.site ?? ''}${base}/logo.jpg`;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{site.title}</title>
     <meta name="description" content={site.description} />
+    <link rel="canonical" href={`${Astro.site ?? 'https://www.technektar.com'}${base}/`} />
     <link rel="icon" type="image/jpeg" href={`${base}/logo.jpg`} />
     <meta property="og:title" content={site.title} />
     <meta property="og:description" content={site.description} />
@@ -26,6 +27,21 @@ const ogImage = `${Astro.site ?? ''}${base}/logo.jpg`;
     />
   </head>
   <body>
+    <script is:inline>document.documentElement.classList.add('js');</script>
     <slot />
+    <script>
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) {
+              e.target.classList.add('is-visible');
+              io.unobserve(e.target);
+            }
+          }
+        },
+        { threshold: 0.12 }
+      );
+      document.querySelectorAll('.reveal, .reveal-stagger').forEach((el) => io.observe(el));
+    </script>
   </body>
 </html>

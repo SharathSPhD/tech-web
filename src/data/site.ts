@@ -8,7 +8,7 @@ export const site = {
   nav: [
     { label: 'Practice', href: '#practice' },
     { label: 'Research', href: '#research' },
-    { label: 'Demos', href: '#demos' },
+    { label: 'Media', href: '#media' },
     { label: 'Writing', href: '#writing' },
   ],
   cta: { label: 'Work with us', href: '#contact' },

@@ -5,93 +5,123 @@ interface Props {
   project: Project;
 }
 const { project } = Astro.props;
-const toneClass = `tone-${project.tone} accent-${project.accent ?? 'orange'}`;
+// 'dark' in the data marks flagship/feature projects — rendered as rich light cards.
+const toneClass = `tone-${project.tone === 'dark' ? 'feature' : project.tone} accent-${project.accent ?? 'orange'}`;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <div class={`pcard lift ${toneClass}`}>
   {
-    (project.kicker || project.meta) && (
-      <div class="head">
-        {project.kicker && <span class="mono kicker-txt">{project.kicker}</span>}
-        {project.meta && <span class="mono meta">{project.meta}</span>}
+    project.figure && (
+      <div class="fig">
+        <img src={`${base}/${project.figure}`} alt={project.figureAlt ?? project.title} loading="lazy" />
       </div>
     )
   }
-  <h4>{project.title}</h4>
-  <p class="blurb">{project.blurb}</p>
-  {
-    project.metrics && project.metrics.length > 0 && (
-      <div class="mono metrics">
-        {project.metrics.map((m) => (
-          <span class={`m-${m.tone ?? 'good'}`}>
-            {m.value}
-            {m.note && <span class="note"> {m.note}</span>}
-          </span>
-        ))}
-      </div>
-    )
-  }
-  {
-    project.links.length > 0 && (
-      <div class="links">
-        {project.links.map((l) => (
-          <a
-            href={l.href}
-            target={l.href.startsWith('#') ? undefined : '_blank'}
-            rel={l.href.startsWith('#') ? undefined : 'noopener'}
-          >
-            {l.label}
-          </a>
-        ))}
-      </div>
-    )
-  }
+  <div class="pad">
+    {
+      (project.kicker || project.meta) && (
+        <div class="head">
+          {project.kicker && <span class="mono kicker-txt">{project.kicker}</span>}
+          {project.meta && <span class="mono meta">{project.meta}</span>}
+        </div>
+      )
+    }
+    <h4>{project.title}</h4>
+    <p class="blurb">{project.blurb}</p>
+    {
+      project.metrics && project.metrics.length > 0 && (
+        <div class="mono metrics">
+          {project.metrics.map((m) => (
+            <span class={`metric m-${m.tone ?? 'good'}`}>
+              {m.value}
+              {m.note && <span class="note"> {m.note}</span>}
+            </span>
+          ))}
+        </div>
+      )
+    }
+    {
+      project.links.length > 0 && (
+        <div class="links">
+          {project.links.map((l) => (
+            <a
+              href={l.href}
+              target={l.href.startsWith('#') ? undefined : '_blank'}
+              rel={l.href.startsWith('#') ? undefined : 'noopener'}
+            >
+              {l.label}
+            </a>
+          ))}
+        </div>
+      )
+    }
+  </div>
 </div>
 
 <style>
-  .pcard { border-radius: 18px; padding: 24px; }
+  .pcard {
+    border-radius: 18px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .pad { padding: 22px; display: flex; flex-direction: column; flex: 1; }
   .head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; }
-  .kicker-txt { font-size: 12px; font-weight: 700; }
-  .meta { font-size: 10.5px; }
-  h4 { font-size: 19px; margin: 12px 0 0; }
-  .blurb { font-size: 13.5px; line-height: 1.55; margin: 8px 0 0; }
-  .metrics { display: flex; gap: 16px; margin-top: 14px; font-size: 12px; flex-wrap: wrap; }
-  .links { display: flex; gap: 12px; margin-top: 16px; font-size: 12.5px; font-weight: 700; flex-wrap: wrap; }
+  .kicker-txt { font-size: 11.5px; font-weight: 700; }
+  .meta { font-size: 10.5px; color: var(--color-neutral-600); }
+  h4 { font-size: 19px; margin: 10px 0 0; }
+  .blurb { font-size: 13.5px; line-height: 1.55; margin: 8px 0 0; color: var(--color-neutral-700); }
+  .metrics { display: flex; gap: 10px; margin-top: 14px; font-size: 12px; flex-wrap: wrap; }
+  .metric { padding: 4px 10px; border-radius: 999px; font-weight: 700; }
+  .links { display: flex; gap: 12px; margin-top: 14px; font-size: 12.5px; font-weight: 700; flex-wrap: wrap; }
+  .fig {
+    aspect-ratio: 21 / 9;
+    overflow: hidden;
+    background: #fff;
+    border-bottom: 1px solid var(--color-divider);
+  }
+  .fig img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
 
-  /* dark terminal card */
-  .tone-dark { background: var(--term-bg); color: var(--term-text); }
-  .tone-dark h4 { color: #fff; }
-  .tone-dark .blurb { color: var(--term-dim); }
-  .tone-dark .meta { color: var(--term-faint); }
-  .tone-dark.accent-orange .kicker-txt, .tone-dark.accent-orange .links a { color: var(--term-orange); }
-  .tone-dark.accent-green .kicker-txt, .tone-dark.accent-green .links a { color: var(--term-green); }
-  .tone-dark .m-good { color: var(--term-green); }
-  .tone-dark .m-warn { color: var(--term-orange); }
-  .tone-dark .m-dim { color: var(--term-faint); }
-  .tone-dark .note { color: var(--term-faint); font-size: 10.5px; }
+  /* feature card — flagship projects, light but rich */
+  .tone-feature {
+    background: linear-gradient(165deg, var(--color-bg), var(--color-neutral-100));
+    border: 1px solid var(--color-divider);
+    box-shadow: var(--shadow-md);
+    position: relative;
+  }
+  .tone-feature::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 4px;
+  }
+  .tone-feature.accent-orange::before { background: linear-gradient(90deg, var(--color-accent-500), var(--color-accent-300)); }
+  .tone-feature.accent-green::before { background: linear-gradient(90deg, var(--color-accent-2-500), var(--color-accent-2-300)); }
+  .tone-feature.accent-orange .kicker-txt, .tone-feature.accent-orange .links a { color: var(--color-accent-700); }
+  .tone-feature.accent-green .kicker-txt, .tone-feature.accent-green .links a { color: var(--color-accent-2-700); }
+  .m-good { background: var(--color-accent-2-100); color: var(--color-accent-2-800); }
+  .m-warn { background: var(--color-accent-100); color: var(--color-accent-800); }
+  .m-dim { background: var(--color-neutral-200); color: var(--color-neutral-700); }
+  .note { font-weight: 400; font-size: 10.5px; opacity: 0.8; }
 
   /* warm card */
   .tone-warm {
     background: var(--color-neutral-100);
     border: 1px solid var(--color-divider);
-    padding: 22px;
   }
-  .tone-warm .kicker-txt { font-size: 11px; color: var(--color-accent-700); }
-  .tone-warm h4 { font-size: 18px; margin-top: 9px; }
-  .tone-warm .blurb { color: var(--color-neutral-700); margin-top: 7px; }
-  .tone-warm .links { margin-top: 12px; }
-  .tone-warm .m-good { color: var(--color-accent-2-700); }
-  .tone-warm .m-dim { color: var(--color-neutral-600); }
-  .tone-warm .note { color: var(--color-neutral-600); font-size: 10.5px; }
+  .tone-warm .kicker-txt { color: var(--color-accent-700); }
+  .tone-warm h4 { font-size: 18px; }
+  .tone-warm .links a { color: var(--color-accent-700); }
 
   /* plain small card */
   .tone-plain {
     background: var(--color-bg);
     border: 1px solid var(--color-divider);
     border-radius: 16px;
-    padding: 20px;
   }
+  .tone-plain .pad { padding: 20px; }
   .tone-plain h4 { font-size: 16.5px; margin: 0; }
-  .tone-plain .blurb { font-size: 13px; line-height: 1.5; color: var(--color-neutral-700); margin: 6px 0 0; }
+  .tone-plain .blurb { font-size: 13px; margin-top: 6px; }
   .tone-plain .links { margin-top: 10px; }
 </style>

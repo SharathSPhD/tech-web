@@ -19,6 +19,9 @@ export interface Project {
   links: ProjectLink[];
   tone: 'dark' | 'warm' | 'plain';
   accent?: 'orange' | 'green';
+  /** path under public/, e.g. 'figures/prayoga.png' — shown as the card visual */
+  figure?: string;
+  figureAlt?: string;
 }
 
 export interface ResearchTheme {
@@ -91,6 +94,8 @@ export const pillars: Pillar[] = [
             ],
             tone: 'dark',
             accent: 'orange',
+            figure: 'figures/prayoga.png',
+            figureAlt: 'Prayoga graphical abstract — refusal direction geometry across model families',
           },
           {
             slug: 'prabodha',
@@ -105,10 +110,12 @@ export const pillars: Pillar[] = [
             ],
             links: [
               { label: 'Launch app ↗', href: 'https://prabodha-live.vercel.app' },
-              { label: 'See demo ↓', href: '#demos' },
+              { label: 'Run it here ↓', href: '#media' },
             ],
             tone: 'dark',
             accent: 'orange',
+            figure: 'figures/prabodha.png',
+            figureAlt: 'Prabodha system architecture — recognition-gated steering of a frozen LLM',
           },
         ],
       },
@@ -138,16 +145,70 @@ export const pillars: Pillar[] = [
               { label: 'Live site ↗', href: 'https://sharathsphd.github.io/pratyabhijna-world-model/' },
             ],
             tone: 'warm',
+            figure: 'figures/pwm.png',
+            figureAlt: 'PWM world-model reasoning trace',
           },
           {
-            slug: 'prabhasa',
-            kicker: 'prabhāsa-saṃskṛtam',
-            title: 'A Sanskrit-internal foundation model',
+            slug: 'prabhasa-babylm',
+            kicker: 'prabhāsa-babylm · PSALM',
+            title: 'A foundation model, built from scratch',
             blurb:
-              'Built from scratch: language parses into a typed Pāṇinian kāraka meaning-graph, the model reasons over that substrate, then renders back losslessly. Plus a 100M BabyLM pretrain.',
+              "Pāṇinian Structured pretraining for small LAnguage Models: a ~200M model pre-pretrained on grammar-generated Sanskrit with gold parses, then real Sanskrit + English (BabyLM), with a 6-phase Navya-Nyāya reasoning scaffold and a Z3 epistemic kernel.",
             links: [
-              { label: 'GitHub ↗', href: 'https://github.com/SharathSPhD/prabhasa-samskrutam' },
+              { label: 'GitHub ↗', href: 'https://github.com/SharathSPhD/prabhasa-babylm' },
             ],
+            tone: 'warm',
+            figure: 'figures/psalm.png',
+            figureAlt: 'Prabhāsa-BabyLM BLiMP results by training arm',
+          },
+        ],
+      },
+      {
+        label: 'Creative & applied AI systems',
+        columnsMin: 260,
+        projects: [
+          {
+            slug: 'pranava',
+            kicker: 'pranava · Śabda-ALM',
+            title: 'Sound as meaning',
+            blurb:
+              'A speech-centred audio language model on a Sanskrit byte-core. The Sphoṭa-Lens localizes where meaning emerges (layer 13, 11× above chance) — and adaptation beats scaling.',
+            links: [
+              { label: 'Live site ↗', href: 'https://sharathsphd.github.io/pranava/' },
+              { label: 'GitHub ↗', href: 'https://github.com/SharathSPhD/pranava' },
+            ],
+            tone: 'warm',
+            figure: 'figures/pranava.png',
+            figureAlt: 'Sphoṭa-Lens meaning-emergence by layer',
+          },
+          {
+            slug: 'pce',
+            kicker: 'pratyabhijñā · plugin',
+            title: 'Pratyabhijñā Creative Engine',
+            blurb:
+              'Recursive self-reflexivity for LLM creative cognition — a Claude Code plugin that generates, judges and consolidates through a recognition cascade.',
+            links: [
+              { label: 'Live site ↗', href: 'https://sharathsphd.github.io/pratyabhijna/' },
+              { label: 'Essay ↗', href: 'https://medium.com/@sharath.ai.colab/pratyabhij%C3%B1%C4%81-creative-engine-69531916e845' },
+            ],
+            tone: 'warm',
+          },
+          {
+            slug: 'neo-fm',
+            kicker: 'neo-fm',
+            title: 'India-first AI music platform',
+            blurb:
+              'Composition-aware instrumental and lyrical generation tuned to Indian traditions — a Next.js app orchestrating a DGX-hosted model fleet, end-to-end in ~39 seconds.',
+            links: [{ label: 'GitHub ↗', href: 'https://github.com/SharathSPhD/neo-fm' }],
+            tone: 'warm',
+          },
+          {
+            slug: 'kundali',
+            kicker: 'kundali · live app',
+            title: 'A machine-verified computation engine',
+            blurb:
+              'Classical jyotiṣa as rigorous software: 196 passing tests, Lean 4 proofs with zero sorry, LLM narration verified against engine output — a template for verifiable domain engines.',
+            links: [{ label: 'Launch app ↗', href: 'https://kundali-five.vercel.app' }],
             tone: 'warm',
           },
         ],
@@ -171,7 +232,12 @@ export const pillars: Pillar[] = [
             title: 'Pratyakṣa',
             blurb:
               'Long-context discipline for Claude Code — Avacchedaka-typed retrieval, Khyātivāda hallucination taxonomy.',
-            links: [{ label: 'GitHub ↗', href: 'https://github.com/SharathSPhD' }],
+            links: [
+              {
+                label: 'GitHub ↗',
+                href: 'https://github.com/SharathSPhD/pratyaksha-context-eng-harness',
+              },
+            ],
             tone: 'plain',
           },
           {
@@ -228,6 +294,8 @@ export const pillars: Pillar[] = [
             ],
             tone: 'dark',
             accent: 'green',
+            figure: 'figures/sco2rl.png',
+            figureAlt: 'sCO2RL system architecture — RL agent in an OpenModelica digital twin loop',
           },
         ],
       },
@@ -269,6 +337,28 @@ export const pillars: Pillar[] = [
             blurb:
               'Convergent Cross Mapping for time-series causality — who is really driving whom, when correlation lies. Correlation plots, forecasts, MAE/RMSE summaries.',
             links: [{ label: 'GitHub ↗', href: 'https://github.com/SharathSPhD/ccmMul' }],
+            tone: 'warm',
+          },
+          {
+            slug: 'coffee-causality',
+            kicker: 'coffee-causality · series',
+            title: 'The Coffee-Shop Mystery',
+            blurb:
+              'Causal inference taught through a café: correlation traps, instrumental variables, double ML and transfer entropy — as Medium essays, YouTube episodes and an executable Jupyter Book.',
+            links: [
+              {
+                label: 'Part A ↗',
+                href: 'https://medium.com/@sharath.ai.colab/the-coffee-shop-mystery-part-a-enter-cafe-chaos-90832c944e74',
+              },
+              {
+                label: 'Part D ↗',
+                href: 'https://medium.com/@sharath.ai.colab/the-coffee-shop-mystery-part-d-flow-dance-52a5a37d0af7',
+              },
+              {
+                label: 'Jupyter Book ↗',
+                href: 'https://sharathsphd.github.io/coffee_causality/intro.html',
+              },
+            ],
             tone: 'warm',
           },
           {
