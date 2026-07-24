@@ -36,7 +36,7 @@ export const practice = {
 export const services = {
   kicker: 'Consulting',
   heading: 'Bring us the problem that sits between fields.',
-  sub: 'Engagements from a two-day teardown to a multi-month build. We prototype fast, ship evidence-gated, and leave you the code and the reasoning.',
+  sub: 'Engagements from a two-day teardown to a multi-month build. We prototype fast, ship tested, and leave you the code and the reasoning.',
   columns: [
     {
       title: 'AI — Foundation Models, Research Engineering & Safety',

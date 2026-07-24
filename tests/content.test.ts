@@ -78,7 +78,7 @@ describe('research projects', () => {
       JSON.stringify(services),
       JSON.stringify(about),
     ].join(' ');
-    expect(text).not.toMatch(/gated to evidence|honest/i);
+    expect(text).not.toMatch(/gated to evidence|evidence-gated|honest/i);
     expect(text).not.toMatch(/information-entropy pricing/i);
   });
   it('deep-tech includes the four technektar.dev highlights with figures', () => {
