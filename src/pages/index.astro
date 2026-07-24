@@ -1,0 +1,35 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import Practice from '../components/Practice.astro';
+import Research from '../components/Research.astro';
+import Demos from '../components/Demos.astro';
+import Writing from '../components/Writing.astro';
+import Services from '../components/Services.astro';
+import About from '../components/About.astro';
+import Contact from '../components/Contact.astro';
+---
+
+<Layout>
+  <div class="page-clip">
+    <Nav />
+    <main>
+      <Hero />
+      <Practice />
+      <Research />
+      <Demos />
+      <Writing />
+      <Services />
+      <About />
+    </main>
+    <Contact />
+  </div>
+</Layout>
+
+<style>
+  .page-clip {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+</style>

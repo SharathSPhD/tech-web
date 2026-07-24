@@ -1,0 +1,269 @@
+---
+import { site } from '../data/site';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<section id="contact">
+  <div class="wrap section-pad grid">
+    <div>
+      <div class="mono kicker-dark">Get in touch</div>
+      <h2>Let's find the cross-pollination in your problem.</h2>
+      <p class="sub">Consulting, collaborations, speaking, or press. Write directly or use the form.</p>
+      <a href={`mailto:${site.email}`} class="mono email">{site.email}</a>
+      <div class="addresses">
+        {
+          site.addresses.map((addr) => (
+            <div>
+              <div class="mono addr-label">{addr.label}</div>
+              <p class="addr">
+                {addr.lines.map((line, i) => (
+                  <>
+                    {line}
+                    {i < addr.lines.length - 1 && <br />}
+                  </>
+                ))}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <div>
+      <div class="sent-panel" id="form-sent" hidden>
+        <div class="check">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>
+        </div>
+        <h3>Message sent</h3>
+        <p>Thanks — we'll be in touch shortly at the address you gave.</p>
+      </div>
+      <form id="contact-form" action={`https://formsubmit.co/${site.email}`} method="POST">
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_subject" value="TechNektar website enquiry" />
+        <label for="cf-name">Name</label>
+        <input id="cf-name" name="name" required type="text" autocomplete="name" />
+        <label for="cf-email">Email</label>
+        <input id="cf-email" name="email" required type="email" autocomplete="email" />
+        <label for="cf-msg">What are you working on?</label>
+        <textarea id="cf-msg" name="message" required rows="4"></textarea>
+        <button type="submit">Send message</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="wrap foot-row">
+      <div class="foot-brand">
+        <div class="brand-line">
+          <img src={`${base}/logo.jpg`} alt="" width="30" height="30" />
+          <span>{site.name}<sup>™</sup></span>
+        </div>
+        <p>{site.footer.entity}</p>
+      </div>
+      <div class="foot-links">
+        {
+          site.social.map((s) => (
+            <a href={s.href} target="_blank" rel="noopener">
+              {s.label}
+            </a>
+          ))
+        }
+      </div>
+    </div>
+    <div class="wrap copyright">{site.footer.copyright}</div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const sent = document.getElementById('form-sent');
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    try {
+      const action = form.action.replace('formsubmit.co/', 'formsubmit.co/ajax/');
+      const res = await fetch(action, {
+        method: 'POST',
+        body: data,
+        headers: { Accept: 'application/json' },
+      });
+      if (!res.ok) throw new Error(`status ${res.status}`);
+    } catch {
+      // Fall back to a plain (non-AJAX) submit so the message still goes through.
+      form.removeEventListener('submit', () => {});
+      form.submit();
+      return;
+    }
+    form.hidden = true;
+    if (sent) sent.hidden = false;
+  });
+</script>
+
+<style>
+  section { background: var(--term-bg); color: var(--term-text); }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 44px;
+  }
+  .kicker-dark {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--term-orange);
+    font-weight: 700;
+  }
+  h2 {
+    font-size: clamp(28px, 3.4vw, 40px);
+    margin: 12px 0 0;
+    color: #fff;
+    letter-spacing: -0.015em;
+  }
+  .sub {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--term-dim);
+    margin: 16px 0 0;
+    max-width: 440px;
+  }
+  .email {
+    display: inline-block;
+    margin-top: 18px;
+    font-size: 15px;
+    color: var(--term-orange);
+    font-weight: 700;
+  }
+  .addresses {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    margin-top: 34px;
+  }
+  .addr-label {
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--term-faint);
+    font-weight: 700;
+  }
+  .addr {
+    font-size: 14px;
+    line-height: 1.55;
+    color: #c9bfae;
+    margin: 8px 0 0;
+  }
+
+  form,
+  .sent-panel {
+    background: var(--term-panel);
+    border: 1px solid var(--term-border);
+    border-radius: 20px;
+    padding: 26px;
+  }
+  .sent-panel {
+    padding: 40px 30px;
+    text-align: center;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .sent-panel[hidden] { display: none; }
+  .check {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--color-accent-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .sent-panel h3 { color: #fff; font-size: 22px; margin: 16px 0 0; }
+  .sent-panel p { color: var(--term-dim); font-size: 14px; margin: 8px 0 0; }
+
+  label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    color: #c9bfae;
+    margin-bottom: 6px;
+  }
+  input:not([type='hidden']),
+  textarea {
+    width: 100%;
+    box-sizing: border-box;
+    background: var(--term-bg);
+    border: 1px solid var(--term-border);
+    border-radius: 999px;
+    padding: 11px 16px;
+    color: var(--term-text);
+    font-family: var(--font-body);
+    font-size: 14px;
+    margin-bottom: 14px;
+  }
+  textarea {
+    border-radius: 16px;
+    resize: vertical;
+    margin-bottom: 16px;
+  }
+  button {
+    width: 100%;
+    background: var(--color-accent);
+    color: #fff;
+    border: 0;
+    padding: 13px;
+    border-radius: 999px;
+    font-family: var(--font-heading);
+    font-size: 15px;
+    cursor: pointer;
+  }
+
+  .footer { border-top: 1px solid var(--term-hairline); }
+  .foot-row {
+    padding: 32px clamp(26px, 4vw, 52px);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .foot-brand { max-width: 460px; }
+  .brand-line { display: flex; align-items: center; gap: 10px; }
+  .brand-line img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center 34%;
+  }
+  .brand-line span {
+    font-family: var(--font-heading);
+    color: #f5ead8;
+    font-size: 17px;
+  }
+  .brand-line sup {
+    font-size: 8px;
+    color: var(--term-orange);
+    font-family: var(--font-body);
+  }
+  .foot-brand p {
+    font-size: 11.5px;
+    line-height: 1.55;
+    color: var(--term-faint);
+    margin: 12px 0 0;
+  }
+  .foot-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 12.5px;
+    font-weight: 700;
+  }
+  .foot-links a { color: #c9bfae; text-decoration: none; }
+  .copyright {
+    padding: 0 clamp(26px, 4vw, 52px) 28px;
+    font-size: 11px;
+    color: var(--term-ghost);
+  }
+</style>

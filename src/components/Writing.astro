@@ -1,0 +1,195 @@
+---
+import { writing } from '../data/writing';
+---
+
+<section id="writing">
+  <div class="wrap section-pad">
+    <div class="kicker">{writing.kicker}</div>
+    <h2>{writing.heading}</h2>
+    <p class="sub">{writing.sub}</p>
+
+    <div class="outlets">
+      {
+        writing.outlets.map((o) => (
+          <a href={o.href} target="_blank" rel="noopener" class="outlet lift">
+            <div class="mono o-kicker">{o.kicker}</div>
+            <h4>{o.title}</h4>
+            <p>{o.body}</p>
+          </a>
+        ))
+      }
+      <div class="outlet">
+        <div class="mono o-kicker">{writing.podcast.kicker}</div>
+        <h4>{writing.podcast.title}</h4>
+        <div class="platforms">
+          {
+            writing.podcast.platforms.map((p) => (
+              <a href={p.href} target="_blank" rel="noopener">
+                {p.label}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="row2">
+      <div class="essays">
+        <div class="mono e-kicker">{writing.essays.kicker}</div>
+        <h4>{writing.essays.title}</h4>
+        {
+          writing.essays.items.map((item) => (
+            <div class="essay">
+              <div class="e-title">{item.title}</div>
+              <div class="e-note">{item.note}</div>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="book">
+        <div class="spine">
+          <div class="spine-title">{writing.book.spineTitle}</div>
+          <div class="spine-sub">{writing.book.spineSub}</div>
+        </div>
+        <div class="book-body">
+          <div class="mono b-kicker">{writing.book.kicker}</div>
+          <h4>{writing.book.title}</h4>
+          <p>{writing.book.body}</p>
+          <div class="stores">
+            {
+              writing.book.stores.map((s) => (
+                <a href={s.href} target="_blank" rel="noopener">
+                  {s.label}
+                </a>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  section { border-bottom: 1px solid var(--color-divider); }
+  h2 {
+    font-size: clamp(28px, 3.4vw, 40px);
+    margin: 12px 0 0;
+    max-width: 720px;
+    letter-spacing: -0.015em;
+  }
+  .sub {
+    font-size: 16px;
+    color: var(--color-neutral-700);
+    max-width: 620px;
+    margin: 14px 0 0;
+  }
+  .outlets {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 16px;
+    margin-top: 34px;
+  }
+  .outlet {
+    text-decoration: none;
+    color: inherit;
+    background: var(--color-neutral-100);
+    border: 1px solid var(--color-divider);
+    border-radius: 18px;
+    padding: 22px;
+    display: block;
+  }
+  .o-kicker { font-size: 11px; font-weight: 700; color: var(--color-accent-700); }
+  .outlet h4 { font-size: 18px; margin: 8px 0 0; }
+  .outlet p {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--color-neutral-700);
+    margin: 7px 0 0;
+  }
+  .platforms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+    font-size: 12.5px;
+    font-weight: 700;
+  }
+
+  .row2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+    align-items: stretch;
+  }
+  .essays {
+    background: var(--color-bg);
+    border: 1px solid var(--color-divider);
+    border-radius: 20px;
+    padding: 26px;
+  }
+  .e-kicker { font-size: 11px; font-weight: 700; color: var(--color-neutral-600); }
+  .essays h4 { font-size: 19px; margin: 9px 0 14px; }
+  .essay {
+    border-left: 2px solid var(--color-accent-300);
+    padding-left: 14px;
+  }
+  .essay + .essay { margin-top: 12px; }
+  .e-title { font-weight: 700; font-size: 14.5px; }
+  .e-note { font-size: 12.5px; color: var(--color-neutral-600); }
+
+  .book {
+    background: linear-gradient(135deg, #2a2118, #17120d);
+    color: var(--term-text);
+    border-radius: 20px;
+    padding: 26px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .spine {
+    width: 96px;
+    height: 132px;
+    border-radius: 8px;
+    background: linear-gradient(160deg, #8c491a, #402310);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 12px;
+    flex: none;
+  }
+  .spine-title {
+    font-family: var(--font-heading);
+    font-size: 17px;
+    line-height: 1.08;
+    color: #f5ead8;
+  }
+  .spine-sub {
+    font-size: 8px;
+    color: var(--term-orange);
+    margin-top: 8px;
+    letter-spacing: 0.04em;
+  }
+  .book-body { flex: 1; min-width: 180px; }
+  .b-kicker { font-size: 11px; font-weight: 700; color: var(--term-orange); }
+  .book-body h4 { color: #fff; font-size: 19px; margin: 8px 0 0; }
+  .book-body p {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--term-dim);
+    margin: 7px 0 0;
+  }
+  .stores {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 12px;
+    font-size: 12.5px;
+    font-weight: 700;
+  }
+  .stores a { color: var(--term-orange); }
+</style>

@@ -1,0 +1,141 @@
+---
+import { site } from '../data/site';
+const { hero } = site;
+---
+
+<a id="top"></a>
+<section class="hero">
+  <div class="wrap grid">
+    <div class="editorial">
+      <span class="badge">{hero.badge}</span>
+      <h1>{hero.heading}</h1>
+      <p class="sub" set:html={hero.sub} />
+      <div class="ctas">
+        <a href={hero.primary.href} class="btn-primary">{hero.primary.label}</a>
+        <a href={hero.secondary.href} class="btn-secondary">{hero.secondary.label}</a>
+      </div>
+      <div class="chips">
+        {hero.chips.map((chip) => <span>{chip}</span>)}
+      </div>
+    </div>
+
+    <div class="terminal" aria-label="Pramana epistemic reasoning trace (illustrative)">
+      <div class="term-bar">
+        <span class="dot" style="background:#c96442"></span>
+        <span class="dot" style="background:#7a8a5e"></span>
+        <span class="dot" style="background:#645c50"></span>
+        <span class="mono term-title">pramana · epistemic-trace.log</span>
+      </div>
+      <div class="mono term-body">
+        <div class="ghost">$ pramana reason --query "is there fire on the hill?"</div>
+        <div class="row first"><span class="phase">◆ SAMSHAYA</span><span class="faint">doubt · type=vyāghāta</span></div>
+        <div class="row"><span class="phase">◆ PRAMANA</span><span>pratyakṣa <span class="green">✓</span> · anumāna <span class="green">✓</span></span></div>
+        <div class="row"><span class="phase">◆ VYAPTI</span><span>smoke ⇒ fire <span class="faint">[invariable]</span></span></div>
+        <div class="row"><span class="phase">◆ TARKA</span><span>counterfactual holds</span></div>
+        <div class="row"><span class="phase">◆ HETVABHASA</span><span class="faint">no fallacy</span></div>
+        <div class="row verdict"><span class="phase green">◆ NIRNAYA</span><span class="white">fire present</span></div>
+        <div class="stats ghost">semantic_correctness <span class="lit">1.00</span>&nbsp;·&nbsp;entropy <span class="lit">0.21</span></div>
+        <div class="ghost">refusal_signature <span class="green">nominal</span> <span class="cursor orange">█</span></div>
+      </div>
+      <div class="mono term-foot">6-phase Navya-Nyāya reasoning · one of 30+ open-source systems below</div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero { border-bottom: 1px solid var(--color-divider); }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  }
+  .editorial { padding: clamp(48px, 6vw, 74px) clamp(26px, 4vw, 52px); }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 6px 13px;
+    border-radius: 999px;
+    background: var(--color-accent-2-200);
+    color: var(--color-accent-2-700);
+  }
+  h1 {
+    font-size: clamp(38px, 5vw, 58px);
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    margin: 22px 0 0;
+  }
+  .sub {
+    font-size: clamp(16px, 1.4vw, 18px);
+    line-height: 1.62;
+    margin: 24px 0 0;
+    color: var(--color-neutral-700);
+    max-width: 520px;
+  }
+  .ctas { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
+  .btn-primary,
+  .btn-secondary {
+    padding: 13px 24px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 15px;
+    text-decoration: none;
+  }
+  .btn-primary { background: var(--color-accent); color: #fff; }
+  .btn-secondary {
+    border: 1.5px solid var(--color-neutral-400);
+    color: var(--color-text);
+  }
+  .chips { display: flex; gap: 9px; margin-top: 34px; flex-wrap: wrap; }
+  .chips span {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: var(--color-surface);
+    color: var(--color-neutral-700);
+  }
+
+  .terminal {
+    background: var(--term-bg);
+    padding: 26px 24px 24px;
+    display: flex;
+    flex-direction: column;
+    min-height: 420px;
+  }
+  .term-bar { display: flex; align-items: center; gap: 7px; margin-bottom: 15px; }
+  .dot { width: 11px; height: 11px; border-radius: 50%; }
+  .term-title { margin-left: 8px; font-size: 11px; color: var(--term-faint); }
+  .term-body { font-size: 12.5px; line-height: 1.9; color: var(--term-text); }
+  .ghost { color: var(--term-ghost); }
+  .faint { color: var(--term-faint); }
+  .green { color: var(--term-green); }
+  .orange { color: var(--term-orange); }
+  .white { color: #fff; }
+  .lit { color: var(--term-text); }
+  .row { display: flex; }
+  .row.first { margin-top: 8px; }
+  .phase {
+    color: var(--term-orange);
+    display: inline-block;
+    width: 118px;
+    flex: none;
+  }
+  .verdict {
+    margin-top: 7px;
+    padding-top: 9px;
+    border-top: 1px solid var(--term-hairline);
+  }
+  .stats { margin-top: 13px; }
+  .term-foot {
+    margin-top: auto;
+    padding-top: 16px;
+    font-size: 10.5px;
+    color: var(--term-faint);
+    border-top: 1px solid var(--term-hairline);
+    margin-top: 18px;
+  }
+</style>

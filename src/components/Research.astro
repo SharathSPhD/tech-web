@@ -1,0 +1,164 @@
+---
+import ProjectCard from './ProjectCard.astro';
+import {
+  researchIntro,
+  pillars,
+  deeptechPublications,
+  deeptechExperience,
+} from '../data/research';
+
+const ai = pillars[0]!;
+const deeptech = pillars[1]!;
+const fintech = pillars[2]!;
+---
+
+<section id="research">
+  <div class="wrap section-pad">
+    <div class="kicker">{researchIntro.kicker}</div>
+    <h2>{researchIntro.heading}</h2>
+
+    <!-- AI pillar -->
+    <div id={ai.id} class="pillar" style={`border-top-color:${ai.accentVar}`}>
+      <div class="pillar-head">
+        <h3 style="color:var(--color-accent-700)">{ai.number} · {ai.name}</h3>
+        <span class="strap">{ai.strap}</span>
+      </div>
+      {
+        ai.themes.map((theme) => (
+          <>
+            {theme.label && <div class="mono theme-label">{theme.label}</div>}
+            <div class="grid" style={`--min:${theme.columnsMin ?? 280}px`}>
+              {theme.projects.map((p) => (
+                <ProjectCard project={p} />
+              ))}
+            </div>
+          </>
+        ))
+      }
+    </div>
+
+    <!-- Deep-tech pillar -->
+    <div id={deeptech.id} class="pillar" style={`border-top-color:${deeptech.accentVar}`}>
+      <div class="pillar-head">
+        <h3 style="color:var(--color-accent-2-700)">{deeptech.number} · {deeptech.name}</h3>
+        <span class="strap">{deeptech.strap}</span>
+      </div>
+      <div class="grid feature-grid" style="--min:300px">
+        {deeptech.themes[0]!.projects.map((p) => <ProjectCard project={p} />)}
+        <div class="pubs lift">
+          <span class="mono pubs-kicker">{deeptechPublications.kicker}</span>
+          <h4>{deeptechPublications.title}</h4>
+          <ul>
+            {deeptechPublications.items.map((item) => <li set:html={item} />)}
+          </ul>
+          <a href={deeptechPublications.scholar.href} target="_blank" rel="noopener">
+            {deeptechPublications.scholar.label}
+          </a>
+        </div>
+      </div>
+      <div class="grid" style="--min:230px">
+        {
+          deeptechExperience.map((exp) => (
+            <div class="exp">
+              <h4>{exp.title}</h4>
+              <p>{exp.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Fintech pillar -->
+    <div id={fintech.id} class="pillar" style={`border-top-color:${fintech.accentVar}`}>
+      <div class="pillar-head">
+        <h3 style="color:var(--color-accent-800)">{fintech.number} · {fintech.name}</h3>
+        <span class="strap">{fintech.strap}</span>
+      </div>
+      <div class="grid fintech-grid" style="--min:300px">
+        <ProjectCard project={fintech.themes[0]!.projects[0]!} />
+        <div class="stack">
+          {fintech.themes[0]!.projects.slice(1).map((p) => <ProjectCard project={p} />)}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  section { border-bottom: 1px solid var(--color-divider); }
+  h2 {
+    font-size: clamp(28px, 3.4vw, 40px);
+    margin: 12px 0 0;
+    max-width: 820px;
+    letter-spacing: -0.015em;
+  }
+  .pillar {
+    margin-top: 52px;
+    padding-top: 30px;
+    border-top: 2px solid;
+  }
+  .pillar-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .pillar-head h3 { font-size: 27px; margin: 0; }
+  .strap { font-size: 14px; color: var(--color-neutral-600); }
+  .theme-label {
+    font-size: 11.5px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-neutral-600);
+    font-weight: 700;
+    margin-top: 30px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(var(--min, 280px), 1fr));
+    gap: 16px;
+    margin-top: 14px;
+    align-items: start;
+  }
+  .pillar > .grid:first-of-type { margin-top: 22px; }
+  .stack { display: flex; flex-direction: column; gap: 16px; }
+
+  .pubs {
+    background: var(--color-neutral-100);
+    border: 1px solid var(--color-divider);
+    border-radius: 18px;
+    padding: 24px;
+  }
+  .pubs-kicker { font-size: 11px; font-weight: 700; color: var(--color-accent-2-700); }
+  .pubs h4 { font-size: 18px; margin: 9px 0 12px; }
+  .pubs ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--color-neutral-800);
+  }
+  .pubs li { padding: 7px 0; border-bottom: 1px solid var(--color-divider); }
+  .pubs li:last-child { border-bottom: 0; }
+  .pubs > a {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 12.5px;
+    font-weight: 700;
+  }
+
+  .exp {
+    background: var(--color-bg);
+    border: 1px solid var(--color-divider);
+    border-radius: 16px;
+    padding: 20px;
+  }
+  .exp h4 { font-size: 16px; margin: 0; }
+  .exp p {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--color-neutral-700);
+    margin: 6px 0 0;
+  }
+</style>

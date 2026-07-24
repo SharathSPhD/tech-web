@@ -1,0 +1,84 @@
+---
+import { site } from '../data/site';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<header class="nav-root">
+  <div class="wrap bar">
+    <a href="#top" class="brand">
+      <img src={`${base}/logo.jpg`} alt="TechNektar" width="36" height="36" />
+      <span class="brand-name">{site.name}<sup>™</sup></span>
+    </a>
+    <nav aria-label="Main">
+      {site.nav.map((item) => <a href={item.href}>{item.label}</a>)}
+      <a href={site.cta.href} class="cta">{site.cta.label}</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .nav-root {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(16px);
+    background: color-mix(in srgb, var(--color-bg) 82%, transparent);
+    border-bottom: 1px solid var(--color-divider);
+  }
+  .bar {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 13px 26px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    text-decoration: none;
+    color: var(--color-text);
+  }
+  .brand img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center 34%;
+    box-shadow: var(--shadow-sm);
+  }
+  .brand-name {
+    font-family: var(--font-heading);
+    font-size: 20px;
+    letter-spacing: -0.01em;
+  }
+  .brand-name sup {
+    font-size: 9px;
+    color: var(--color-accent);
+    font-family: var(--font-body);
+    font-weight: 700;
+    top: -0.7em;
+    position: relative;
+  }
+  nav {
+    display: flex;
+    gap: 22px;
+    margin-left: auto;
+    font-size: 14px;
+    font-weight: 600;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  nav a {
+    color: var(--color-neutral-700);
+    text-decoration: none;
+  }
+  nav a.cta {
+    background: var(--color-accent);
+    color: #fff;
+    padding: 9px 17px;
+    border-radius: 999px;
+  }
+  @media (max-width: 640px) {
+    nav a:not(.cta) { display: none; }
+  }
+</style>
