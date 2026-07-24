@@ -15,7 +15,7 @@ export const site = {
   hero: {
     badge: 'Research & Engineering',
     heading: 'Where frontier research becomes product',
-    sub: 'TechNektar™ works across three fields that feed each other — <strong>AI</strong>, <strong>deep-tech engineering</strong> and <strong>fintech</strong>. Our own research goes out into the world as papers, code, apps and podcasts; client work stays confidential, and yours to keep.',
+    sub: 'TechNektar™ works across three fields that feed each other — <strong>AI</strong>, <strong>deep-tech engineering</strong> and <strong>fintech</strong>.',
     primary: { label: 'Explore the work →', href: '#research' },
     secondary: { label: 'Book a conversation', href: '#contact' },
     chips: ['Mechanistic Interpretability', 'RL Control', 'Causal Inference', 'World Models'],
