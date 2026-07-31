@@ -187,8 +187,6 @@ export const pillars: Pillar[] = [
               { label: 'GitHub ↗', href: 'https://github.com/SharathSPhD/pranava' },
             ],
             tone: 'warm',
-            figure: 'figures/pranava.png',
-            figureAlt: 'Sphoṭa-Lens meaning-emergence by layer',
           },
           {
             slug: 'pce',
