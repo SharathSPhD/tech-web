@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 
 // Deploys to GitHub Pages at https://sharathsphd.github.io/tech-web/
 // (site/base are ignored by Vercel, which serves from the domain root —
@@ -10,4 +11,5 @@ export default defineConfig({
   base,
   output: 'static',
   build: { inlineStylesheets: 'auto' },
+  integrations: [sitemap()],
 });

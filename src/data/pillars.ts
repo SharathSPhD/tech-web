@@ -1,7 +1,7 @@
 export const practice = {
   kicker: 'The practice',
   heading: 'Three fields, cross-pollinating. Ideas from one sharpen the others.',
-  sub: 'Ancient epistemology tightens our AI. Aerospace-grade rigor tunes our control systems. Causal thinking from physics reshapes how businesses decide. We consult across all three — and open-source the research.',
+  sub: 'Ancient epistemology tightens our AI. Aerospace-grade rigor tunes our control systems. Causal thinking from physics reshapes how businesses decide. We consult across all three.',
   cards: [
     {
       id: 'ai',
@@ -24,7 +24,7 @@ export const practice = {
     {
       id: 'fintech',
       number: '03 — FINTECH',
-      title: 'Decisions that learn',
+      title: 'Decisions that deliver value',
       body: 'Causal inference when correlation lies, world models that plan in imagination, and the storytelling that makes analytics land in the boardroom.',
       link: { label: 'See fintech →', href: '#pillar-fintech' },
       icon: 'fintech',
@@ -35,8 +35,8 @@ export const practice = {
 
 export const services = {
   kicker: 'Consulting',
-  heading: 'Bring us the problem that sits between fields.',
-  sub: 'Engagements from a two-day teardown to a multi-month build. We prototype fast, ship tested, and leave you the code and the reasoning.',
+  heading: 'Bring us the hard problem.',
+  sub: 'Engagements from a two-day teardown to a multi-month build. We prototype fast, ship tested, and leave you the code and the reasoning. Problems that straddle two disciplines are a specialty — but a hard problem inside one is just as welcome.',
   columns: [
     {
       title: 'AI — Foundation Models, Research Engineering & Safety',

@@ -205,9 +205,9 @@ export const pillars: Pillar[] = [
           {
             slug: 'neo-fm',
             kicker: 'neo-fm',
-            title: 'India-first AI music platform',
+            title: 'An AI music platform',
             blurb:
-              'Composition-aware instrumental and lyrical generation tuned to Indian traditions — a Next.js app orchestrating a DGX-hosted model fleet, end-to-end in ~39 seconds.',
+              'Composition-aware instrumental and lyrical generation — a Next.js app orchestrating a DGX-hosted model fleet, end-to-end in ~39 seconds.',
             links: [{ label: 'GitHub ↗', href: 'https://github.com/SharathSPhD/neo-fm' }],
             tone: 'warm',
           },

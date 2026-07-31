@@ -22,6 +22,23 @@ export const videos: Video[] = [
   { id: 'o6fICWAWEGw', title: 'Oscillatory Odyssey (Resonance Rising) · Part 3', series: 'Physics' },
 ];
 
+export interface Talk {
+  id: string;
+  title: string;
+  venue: string;
+  note: string;
+}
+
+/** Invited talks and public appearances — same player pattern as `videos`. */
+export const talks: Talk[] = [
+  {
+    id: 'U9Z0TIeq1Fc',
+    title: 'Active Circuit Discovery',
+    venue: 'Active Inference Institute · ModelStream 010.1',
+    note: 'An invited live session on finding the features that causally drive a language model’s answer — active inference over attribution graphs, walked through end to end.',
+  },
+];
+
 export interface AppEmbed {
   id: string;
   title: string;
@@ -199,8 +216,8 @@ export const reads: { outlet: string; kicker: string; href: string; items: Artic
 export const mediaHub = {
   kicker: 'Live & interactive',
   heading: 'Don’t take our word for it — run it, watch it, read it.',
-  sub: 'Every claim on this page opens into something you can use right now: live apps, research sites, storytelling episodes and essays.',
-  tabs: { watch: 'Watch', run: 'Run', read: 'Read' },
+  sub: 'Every claim on this page opens into something you can use right now: live apps, research sites, storytelling episodes, invited talks and essays.',
+  tabs: { watch: 'Watch', run: 'Run', read: 'Read', talks: 'Talks' },
 } as const;
 
 export const stats = [
@@ -208,5 +225,5 @@ export const stats = [
   { value: '8', label: 'live apps & research sites' },
   { value: '5', label: 'peer-reviewed papers + a patent' },
   { value: '13', label: 'storytelling episodes' },
-  { value: '1', label: 'machine-verified book' },
+  { value: '1', label: 'published book' },
 ] as const;

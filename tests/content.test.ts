@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { site } from '../src/data/site';
+import { addressLines, site } from '../src/data/site';
 import { pillars, deeptechPublications, deeptechExperience } from '../src/data/research';
 import { practice, services, about } from '../src/data/pillars';
 import { writing } from '../src/data/writing';
-import { appEmbeds, reads, videos } from '../src/data/media';
+import { appEmbeds, reads, stats, talks, videos } from '../src/data/media';
 
 const allProjects = pillars.flatMap((p) => p.themes.flatMap((t) => t.projects));
 
@@ -25,15 +25,52 @@ describe('site config', () => {
   it('has a valid contact email', () => {
     expect(site.email).toMatch(/^[^@\s]+@[^@\s]+\.[a-z]+$/);
   });
-  it('addresses contain no banned location text', () => {
-    const text = JSON.stringify(site.addresses);
-    expect(text).not.toMatch(/prestige|primrose/i);
-    expect(text).toContain('Banashankari');
-    expect(text).toContain('Karnataka, India');
+  it('addresses render correctly and contain no banned location text', () => {
+    const rendered = site.addresses.map((a) => addressLines(a).join('\n'));
+    expect(rendered.join(' ')).not.toMatch(/prestige|primrose/i);
+    expect(rendered[0]).toBe('TechNektar\n5 Brayford Square\nLondon E1 0SG\nUnited Kingdom');
+    expect(rendered[1]).toBe('TechNektar\nBanashankari\nBengaluru 560109\nKarnataka, India');
   });
-  it('footer keeps trademark line and no disavowal', () => {
-    expect(site.footer.entity).toContain('trademark registered in the United Kingdom');
+  it('footer states the trade mark accurately and carries no disavowal', () => {
+    expect(site.footer.entity).toContain('UK00004419288');
+    expect(site.footer.entity).toContain('published for opposition');
     expect(site.footer.entity).not.toMatch(/not affiliated/i);
+  });
+  it('never claims the mark is registered while it is only published', () => {
+    // UK Trade Marks Act 1994 s.95 — representing a mark as registered before
+    // registration is an offence. Guard every user-visible string.
+    const all = [
+      JSON.stringify(site),
+      JSON.stringify(practice),
+      JSON.stringify(services),
+      JSON.stringify(about),
+    ].join(' ');
+    expect(all).not.toMatch(/registered trade ?mark/i);
+    expect(all).not.toMatch(/trade ?mark registered/i);
+    expect(all).not.toContain('®');
+  });
+  it('publishes no private registration data', () => {
+    const all = JSON.stringify(site);
+    expect(all).not.toMatch(/BBRPS0350L/i); // PAN
+    expect(all).not.toMatch(/10791610000671/); // bank account
+    expect(all).not.toMatch(/HDFC0001079/); // IFSC
+    expect(all).not.toMatch(/9986526623/); // personal mobile
+    expect(all).not.toMatch(/sharath\.sathish@/i); // personal email
+    expect(all).not.toMatch(/UDYAM-KR-03-0729811/); // registration id withheld by choice
+  });
+  it('addresses carry no correspondence/registered qualifiers', () => {
+    for (const addr of site.addresses) {
+      expect(addr.label).not.toMatch(/correspondence|registered/i);
+    }
+    expect(site.addresses.map((a) => a.label)).toEqual(['London', 'Bengaluru']);
+  });
+  it('hero capabilities are tiered domains → disciplines → solutions', () => {
+    const labels = site.hero.capabilities.map((c) => c.label);
+    expect(labels).toEqual(['Domains', 'Disciplines', 'Solutions']);
+    const flat = site.hero.capabilities.flatMap((c) => c.items as readonly string[]);
+    for (const expected of ['AI', 'Aerospace', 'Turbomachinery', 'Foundation Models']) {
+      expect(flat).toContain(expected);
+    }
   });
 });
 
@@ -152,6 +189,43 @@ describe('media hub', () => {
     for (const outlet of reads) expect(outlet.items.length).toBeGreaterThanOrEqual(4);
     const joined = JSON.stringify(reads);
     expect(joined).toContain('Coffee Shop Mystery');
+  });
+});
+
+describe('public talks', () => {
+  it('lists invited talks with a venue and a valid video id', () => {
+    expect(talks.length).toBeGreaterThanOrEqual(1);
+    for (const t of talks) {
+      expect(t.id).toMatch(/^[\w-]{11}$/);
+      expect(t.venue.length).toBeGreaterThan(5);
+      expect(t.note.length).toBeGreaterThan(20);
+    }
+  });
+  it('includes the Active Inference Institute ModelStream talk', () => {
+    const actinf = talks.find((t) => t.venue.includes('Active Inference Institute'));
+    expect(actinf).toBeDefined();
+    expect(actinf!.id).toBe('U9Z0TIeq1Fc');
+  });
+});
+
+describe('v4 copy requirements', () => {
+  it('practice no longer promises to open-source the research', () => {
+    expect(practice.sub).not.toMatch(/open-source the research/i);
+  });
+  it('fintech card leads on delivered value', () => {
+    const fintech = practice.cards.find((c) => c.id === 'fintech')!;
+    expect(fintech.title).toBe('Decisions that deliver value');
+  });
+  it('consulting headline does not require a cross-field problem', () => {
+    expect(services.heading).not.toMatch(/between fields/i);
+  });
+  it('neo-fm is described without a nationality frame', () => {
+    const neo = allProjects.find((p) => p.slug === 'neo-fm')!;
+    expect(`${neo.title} ${neo.blurb}`).not.toMatch(/india-first/i);
+  });
+  it('stats band counts a published book', () => {
+    const book = stats.find((s) => s.label.includes('book'))!;
+    expect(book.label).toBe('published book');
   });
 });
 

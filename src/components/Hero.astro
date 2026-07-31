@@ -14,8 +14,19 @@ const { hero } = site;
         <a href={hero.primary.href} class="btn-primary">{hero.primary.label}</a>
         <a href={hero.secondary.href} class="btn-secondary">{hero.secondary.label}</a>
       </div>
-      <div class="chips">
-        {hero.chips.map((chip) => <span>{chip}</span>)}
+      <div class="caps">
+        {
+          hero.capabilities.map((tier) => (
+            <div class="tier">
+              <span class="mono tier-label">{tier.label}</span>
+              <div class="chips">
+                {tier.items.map((item) => (
+                  <span>{item}</span>
+                ))}
+              </div>
+            </div>
+          ))
+        }
       </div>
     </div>
 
@@ -89,7 +100,22 @@ const { hero } = site;
     border: 1.5px solid var(--color-neutral-400);
     color: var(--color-text);
   }
-  .chips { display: flex; gap: 9px; margin-top: 34px; flex-wrap: wrap; }
+  .caps { margin-top: 32px; display: flex; flex-direction: column; gap: 12px; }
+  .tier {
+    display: grid;
+    grid-template-columns: 82px 1fr;
+    align-items: start;
+    gap: 12px;
+  }
+  .tier-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-neutral-600);
+    padding-top: 7px;
+  }
+  .chips { display: flex; gap: 7px; flex-wrap: wrap; }
   .chips span {
     font-size: 11px;
     font-weight: 700;
@@ -97,6 +123,21 @@ const { hero } = site;
     border-radius: 999px;
     background: var(--color-surface);
     color: var(--color-neutral-700);
+    border: 1px solid transparent;
+  }
+  .tier:first-child .chips span {
+    background: var(--color-accent-100);
+    color: var(--color-accent-800);
+    border-color: color-mix(in srgb, var(--color-accent-400) 40%, transparent);
+  }
+  .tier:nth-child(2) .chips span {
+    background: var(--color-accent-2-100);
+    color: var(--color-accent-2-800);
+    border-color: color-mix(in srgb, var(--color-accent-2-400) 40%, transparent);
+  }
+  @media (max-width: 520px) {
+    .tier { grid-template-columns: 1fr; gap: 5px; }
+    .tier-label { padding-top: 0; }
   }
 
   .terminal {

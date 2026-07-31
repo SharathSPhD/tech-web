@@ -43,6 +43,45 @@ test('media hub: run tab switches app iframes', async ({ page }) => {
   await expect(page.locator('#app-url')).toContainText('triz-engine');
 });
 
+test('media hub: talks tab plays the invited talk', async ({ page }) => {
+  await page.goto('./');
+  await page.locator('#media [data-tab=talks]').click();
+  await expect(page.locator('#panel-talks')).toBeVisible();
+  const player = page.locator('#talk-player');
+  await expect(player).toHaveAttribute('src', /U9Z0TIeq1Fc/);
+  const card = page.locator('.titem').first();
+  await expect(card).toContainText('Active Circuit Discovery');
+  await expect(card).toContainText('Active Inference Institute');
+  await card.click();
+  await expect(player).toHaveAttribute('src', /autoplay=1/);
+});
+
+test('hero shows the tiered capability taxonomy', async ({ page }) => {
+  await page.goto('./');
+  for (const label of ['Domains', 'Disciplines', 'Solutions']) {
+    await expect(page.locator('.tier-label', { hasText: label })).toBeVisible();
+  }
+  await expect(page.locator('.chips span', { hasText: 'Turbomachinery' })).toBeVisible();
+});
+
+test('head carries SEO and structured data', async ({ page }) => {
+  await page.goto('./');
+  await expect(page.locator('link[rel=canonical]')).toHaveAttribute('href', /technektar|github/);
+  await expect(page.locator('meta[name=robots]')).toHaveAttribute('content', /max-image-preview/);
+  await expect(page.locator('meta[property="og:image"]')).toHaveCount(1);
+  await expect(page.locator('meta[name="twitter:card"]')).toHaveCount(1);
+
+  const raw = await page.locator('script[type="application/ld+json"]').innerText();
+  const data = JSON.parse(raw);
+  expect(data['@context']).toBe('https://schema.org');
+  const types = data['@graph'].flatMap((n: any) =>
+    Array.isArray(n['@type']) ? n['@type'] : [n['@type']]
+  );
+  for (const t of ['Organization', 'WebSite', 'ItemList', 'FAQPage', 'VideoObject', 'Book']) {
+    expect(types).toContain(t);
+  }
+});
+
 test('media hub: read tab lists real articles', async ({ page }) => {
   await page.goto('./');
   await page.locator('#media [data-tab=read]').click();
