@@ -21,7 +21,7 @@ export const GET: APIRoute = () => {
   push(`> ${site.description}`);
   push();
   push(
-    `${site.name}™ is an independent research and engineering consultancy working from London (United Kingdom) and Bengaluru (India), taking engagements worldwide. Contact: ${site.email}`
+    `${site.name}® is an independent research and engineering consultancy working from London (United Kingdom) and Bengaluru (India), taking engagements worldwide. Contact: ${site.email}`
   );
   push();
 

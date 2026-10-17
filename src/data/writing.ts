@@ -65,6 +65,9 @@ export const writing = {
       { label: 'Amazon India ↗', href: 'https://amzn.in/d/08HfhCOr' },
       { label: 'Amazon UK/EU ↗', href: 'https://amzn.eu/d/028wJCMp' },
       { label: 'Apple Books ↗', href: 'https://books.apple.com/us/book/the-proven-word/id6793464647' },
+      { label: 'Print · Amazon India ↗', href: 'https://www.amazon.in/dp/B0HN5G4JH7' },
+      { label: 'Print · Flipkart ↗', href: 'https://www.flipkart.com/proven-word-machine-verified-reading-bhartrhari-s-vakyapadiyam/p/itm4244e1a84a0b4?pid=9798903307869' },
+      { label: 'Print · Pothi ↗', href: 'https://store.pothi.com/book/dr-sharath-sathish-the-proven-word-a-machine-verified-reading-bhartrharis-vakyapadiyam/' },
     ],
   },
 } as const;

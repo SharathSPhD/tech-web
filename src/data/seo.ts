@@ -20,7 +20,7 @@ export function buildJsonLd(origin: string) {
     '@type': ['Organization', 'ProfessionalService'],
     '@id': orgId,
     name: site.name,
-    alternateName: 'TechNektar™',
+    alternateName: 'TechNektar®',
     url,
     logo: `${origin}/logo.jpg`,
     image: `${origin}/logo.jpg`,

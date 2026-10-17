@@ -30,7 +30,7 @@ describe('structured data', () => {
     expect(bengaluru).toMatchObject({
       addressLocality: 'Bengaluru',
       addressRegion: 'Karnataka',
-      postalCode: '560109',
+      postalCode: '560095',
       addressCountry: 'IN',
     });
     expect(org.sameAs.length).toBeGreaterThanOrEqual(5);

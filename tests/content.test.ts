@@ -29,29 +29,24 @@ describe('site config', () => {
     const rendered = site.addresses.map((a) => addressLines(a).join('\n'));
     expect(rendered.join(' ')).not.toMatch(/prestige|primrose/i);
     expect(rendered[0]).toBe('TechNektar\n5 Brayford Square\nLondon E1 0SG\nUnited Kingdom');
-    expect(rendered[1]).toBe('TechNektar\nBanashankari\nBengaluru 560109\nKarnataka, India');
+    expect(rendered[1]).toBe(
+      'TechNektar\n2nd and 3rd Floor, No. 472/7, Balaji Arcade, AVS Compound, 20th L Cross Road, AVS Layout, Ejipura\nKoramangala, Bengaluru 560095\nKarnataka, India'
+    );
   });
-  it('footer states the trade mark accurately and carries no disavowal', () => {
+  it('footer states the registered trade mark and GSTIN, with no disavowal', () => {
     expect(site.footer.entity).toContain('UK00004419288');
-    expect(site.footer.entity).toContain('published for opposition');
+    expect(site.footer.entity).toContain('registered trade mark');
+    expect(site.footer.entity).toContain('29BBRPS0350L1Z1');
     expect(site.footer.entity).not.toMatch(/not affiliated/i);
   });
-  it('never claims the mark is registered while it is only published', () => {
-    // UK Trade Marks Act 1994 s.95 — representing a mark as registered before
-    // registration is an offence. Guard every user-visible string.
-    const all = [
-      JSON.stringify(site),
-      JSON.stringify(practice),
-      JSON.stringify(services),
-      JSON.stringify(about),
-    ].join(' ');
-    expect(all).not.toMatch(/registered trade ?mark/i);
-    expect(all).not.toMatch(/trade ?mark registered/i);
-    expect(all).not.toContain('®');
+  it('uses the registered mark symbol and never the TM symbol', () => {
+    const all = [JSON.stringify(site), JSON.stringify(practice), JSON.stringify(services), JSON.stringify(about)].join(' ');
+    expect(all).not.toContain('™');
+    expect(site.footer.copyright).toContain('®');
   });
   it('publishes no private registration data', () => {
     const all = JSON.stringify(site);
-    expect(all).not.toMatch(/BBRPS0350L/i); // PAN
+    expect(all.replace('29BBRPS0350L1Z1', '')).not.toMatch(/BBRPS0350L/i); // PAN (only inside the GSTIN)
     expect(all).not.toMatch(/10791610000671/); // bank account
     expect(all).not.toMatch(/HDFC0001079/); // IFSC
     expect(all).not.toMatch(/9986526623/); // personal mobile
@@ -164,9 +159,11 @@ describe('external links', () => {
 });
 
 describe('book', () => {
-  it('is The Proven Word with three store links', () => {
+  it('is The Proven Word with ebook and print store links', () => {
     expect(writing.book.title).toBe('The Proven Word');
-    expect(writing.book.stores).toHaveLength(3);
+    expect(writing.book.stores).toHaveLength(6);
+    const joined = writing.book.stores.map((s) => s.href).join(' ');
+    for (const h of ['amazon.in/dp/B0HN5G4JH7', 'flipkart.com', 'store.pothi.com']) expect(joined).toContain(h);
   });
 });
 

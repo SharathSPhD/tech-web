@@ -1,9 +1,9 @@
 export const site = {
   name: 'TechNektar',
   tagline: 'Cross-Pollinating Innovation',
-  title: 'TechNektar™ — Where frontier research becomes product',
+  title: 'TechNektar® — Where frontier research becomes product',
   description:
-    'TechNektar™ is an independent research and engineering consultancy across AI, deep-tech and fintech — foundation models, mechanistic interpretability, fine-tuning, reinforcement-learning control, aerodynamics, turbomachinery and causal analytics.',
+    'TechNektar® is an independent research and engineering consultancy across AI, deep-tech and fintech — foundation models, mechanistic interpretability, fine-tuning, reinforcement-learning control, aerodynamics, turbomachinery and causal analytics.',
   email: 'info@technektar.com',
   nav: [
     { label: 'Practice', href: '#practice' },
@@ -15,7 +15,7 @@ export const site = {
   hero: {
     badge: 'Research & Engineering',
     heading: 'Where frontier research becomes product',
-    sub: 'TechNektar™ works across three fields that feed each other — <strong>AI</strong>, <strong>deep-tech engineering</strong> and <strong>fintech</strong>.',
+    sub: 'TechNektar® works across three fields that feed each other — <strong>AI</strong>, <strong>deep-tech engineering</strong> and <strong>fintech</strong>.',
     primary: { label: 'Explore the work →', href: '#research' },
     secondary: { label: 'Book a conversation', href: '#contact' },
     /** Three tiers, coarse to specific: where we work, what we practise, what we build. */
@@ -56,9 +56,10 @@ export const site = {
     },
     {
       label: 'Bengaluru',
-      street: 'Banashankari',
+      street: '2nd and 3rd Floor, No. 472/7, Balaji Arcade, AVS Compound, 20th L Cross Road, AVS Layout, Ejipura',
+      area: 'Koramangala',
       locality: 'Bengaluru',
-      postalCode: '560109',
+      postalCode: '560095',
       region: 'Karnataka',
       country: 'India',
       countryCode: 'IN',
@@ -73,11 +74,12 @@ export const site = {
     { label: 'YouTube', href: 'https://www.youtube.com/playlist?list=PLDVuUgaLkOL1O58tGrO9MZ0RCqO3fxq43' },
   ],
   footer: {
-    // Status is deliberately precise: the UK mark is published for opposition,
-    // not yet registered — claiming registration early is an offence (TMA 1994 s.95).
+    // Status is deliberately precise: the UK mark registered on 9 October 2026
+    // (UKIPO certificate, effective 22 July 2026). Only legally necessary
+    // identifiers are shown; the GSTIN is the Indian entity's public registration.
     entity:
-      'TechNektar™ — UK trade mark application No. UK00004419288 (classes 9, 16, 42), published for opposition on 31 July 2026. An independent research & engineering consultancy; a Udyam-registered micro enterprise based in Bengaluru, India.',
-    copyright: '© 2026 TechNektar™ · Cross-Pollinating Innovation',
+      'TechNektar® — UK registered trade mark No. UK00004419288 (classes 9, 16, 42). An independent research & engineering consultancy based in Bengaluru, India · GSTIN 29BBRPS0350L1Z1.',
+    copyright: '© 2026 TechNektar® · Cross-Pollinating Innovation',
   },
 } as const;
 
@@ -86,10 +88,11 @@ export type Address = (typeof site.addresses)[number];
 /** The postal block as displayed, derived from the structured address. */
 export function addressLines(addr: Address): string[] {
   const region = 'region' in addr ? addr.region : undefined;
+  const area = 'area' in addr ? addr.area : undefined;
   return [
     site.name,
     addr.street,
-    `${addr.locality} ${addr.postalCode}`,
+    `${area ? `${area}, ` : ''}${addr.locality} ${addr.postalCode}`,
     region ? `${region}, ${addr.country}` : addr.country,
   ];
 }

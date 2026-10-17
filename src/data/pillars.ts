@@ -75,7 +75,7 @@ export const about = {
   kicker: 'About the practice',
   heading: 'Cross-pollinating innovation, literally.',
   paragraphs: [
-    'TechNektar™ is an independent research & engineering practice, led by a data scientist and engineer with a PhD in supercritical-CO₂ power cycles and decades of frontier experience — from inertial-navigation avionics at the Vikram Sarabhai Space Centre, to diagnostics and prognostics at General Electric, to research at world-leading institutions.',
+    'TechNektar® is an independent research & engineering practice, led by a data scientist and engineer with a PhD in supercritical-CO₂ power cycles and decades of frontier experience — from inertial-navigation avionics at the Vikram Sarabhai Space Centre, to diagnostics and prognostics at General Electric, to research at world-leading institutions.',
     'The through-line is transfer: aerospace analytics informing demand models; 2,500-year-old logic tightening machine reasoning; reinforcement learning running a power plant. We publish in the open because tested ideas travel further — and we consult because the fastest route from idea to product is a team that has already shipped across all three fields. If your hardest problem sits between disciplines, it has come to the right place.',
   ],
   institutions: [
