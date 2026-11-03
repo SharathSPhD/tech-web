@@ -42,6 +42,7 @@ export function buildJsonLd(origin: string) {
       { '@type': 'Place', name: 'Worldwide' },
     ],
     sameAs: site.social.map((s) => s.href),
+    subOrganization: { '@type': 'Organization', name: 'neo-fm', url: 'https://neo-fm.com' },
     makesOffer: services.columns.map((col) => ({
       '@type': 'Offer',
       itemOffered: {
