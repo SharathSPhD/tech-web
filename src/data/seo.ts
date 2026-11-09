@@ -101,7 +101,7 @@ export function buildJsonLd(origin: string) {
     embedUrl: `https://www.youtube.com/embed/${t.id}`,
     url: `https://www.youtube.com/watch?v=${t.id}`,
     thumbnailUrl: `https://i.ytimg.com/vi/${t.id}/hqdefault.jpg`,
-    uploadDate: '2026-01-01',
+    uploadDate: t.uploadDate,
     publisher: { '@id': orgId },
   }));
 

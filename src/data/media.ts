@@ -27,6 +27,8 @@ export interface Talk {
   title: string;
   venue: string;
   note: string;
+  /** Full ISO 8601 with a UTC offset (Google rejects dates without one). */
+  uploadDate: string;
 }
 
 /** Invited talks and public appearances — same player pattern as `videos`. */
@@ -36,6 +38,7 @@ export const talks: Talk[] = [
     title: 'Active Circuit Discovery',
     venue: 'Active Inference Institute · ModelStream 010.1',
     note: 'An invited live session on finding the features that causally drive a language model’s answer — active inference over attribution graphs, walked through end to end.',
+    uploadDate: '2026-07-30T01:56:19-07:00',
   },
 ];
 
